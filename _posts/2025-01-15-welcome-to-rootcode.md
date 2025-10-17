@@ -1,98 +1,161 @@
 ---
 layout: post
-title: Welcome to RootCode!
-categories: [General, Welcome]
+title: Building Modern Web Applications with React and TypeScript
+categories: [Web Development, React, TypeScript]
+excerpt: Learn how to build scalable, type-safe web applications using React and TypeScript. This comprehensive guide covers best practices, project setup, and advanced patterns.
 ---
 
-Welcome to **RootCode** - your new Jekyll-powered blog! This is your first blog post, and we're excited to have you here.
+React and TypeScript have become the go-to combination for building robust, maintainable web applications. In this post, we'll explore why this pairing is so powerful and how to leverage it effectively.
 
-## What is RootCode?
+## Why React + TypeScript?
 
-RootCode is a clean, minimal Jekyll blog built with the Reverie theme. It's designed to help you focus on what matters most: your content.
+TypeScript adds static typing to JavaScript, catching errors at compile-time rather than runtime. When combined with React, you get:
 
-## Features
+- **Type Safety**: Catch bugs before they reach production
+- **Better IntelliSense**: Enhanced IDE autocomplete and documentation
+- **Refactoring Confidence**: Rename components and props with certainty
+- **Self-Documenting Code**: Types serve as inline documentation
 
-This blog comes with several great features out of the box:
+## Setting Up Your Project
 
-- **Clean Design**: A minimalist, distraction-free reading experience
-- **Responsive Layout**: Looks great on desktop, tablet, and mobile
-- **Syntax Highlighting**: Perfect for sharing code snippets
-- **SEO Optimized**: Built-in SEO tags and sitemap generation
-- **RSS Feed**: Let readers subscribe to your content
-- **Social Links**: Easy integration with social media profiles
+Create a new React TypeScript project using Vite (faster than Create React App):
 
-## Getting Started
-
-To create a new post, simply add a new markdown file to the `_posts` directory with the following naming convention:
-
-```
-YEAR-MONTH-DAY-title.md
+```bash
+npm create vite@latest my-app -- --template react-ts
+cd my-app
+npm install
+npm run dev
 ```
 
-For example: `2025-01-15-my-first-post.md`
+Your project structure will look like this:
 
-### Front Matter
-
-Each post should start with YAML front matter:
-
-```yaml
----
-layout: post
-title: Your Post Title
-categories: [Category1, Category2]
----
+```
+my-app/
+├── src/
+│   ├── App.tsx
+│   ├── main.tsx
+│   └── vite-env.d.ts
+├── index.html
+├── package.json
+└── tsconfig.json
 ```
 
-## Code Highlighting
+## Defining Component Props
 
-You can easily share code snippets with syntax highlighting. Here's an example in Python:
+Always type your component props for better maintainability:
 
-```python
-def hello_world():
-    print("Hello from RootCode!")
-    return True
+```typescript
+interface ButtonProps {
+  label: string;
+  onClick: () => void;
+  variant?: 'primary' | 'secondary';
+  disabled?: boolean;
+}
 
-if __name__ == "__main__":
-    hello_world()
-```
-
-And here's some JavaScript:
-
-```javascript
-const greet = (name) => {
-  console.log(`Hello, ${name}! Welcome to RootCode.`);
+const Button: React.FC<ButtonProps> = ({
+  label,
+  onClick,
+  variant = 'primary',
+  disabled = false
+}) => {
+  return (
+    <button
+      className={`btn btn-${variant}`}
+      onClick={onClick}
+      disabled={disabled}
+    >
+      {label}
+    </button>
+  );
 };
-
-greet('Developer');
 ```
 
-## Markdown Support
+## Using State with TypeScript
 
-This blog supports all standard Markdown features:
+TypeScript infers types automatically, but you can be explicit when needed:
 
-### Lists
+```typescript
+import { useState } from 'react';
 
-- Item 1
-- Item 2
-  - Nested item
-  - Another nested item
+interface User {
+  id: number;
+  name: string;
+  email: string;
+}
 
-### Numbered Lists
+function UserProfile() {
+  const [user, setUser] = useState<User | null>(null);
+  const [loading, setLoading] = useState<boolean>(false);
 
-1. First item
-2. Second item
-3. Third item
+  const fetchUser = async (id: number) => {
+    setLoading(true);
+    try {
+      const response = await fetch(`/api/users/${id}`);
+      const data: User = await response.json();
+      setUser(data);
+    } catch (error) {
+      console.error('Failed to fetch user:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
-### Blockquotes
+  return (
+    <div>
+      {loading && <p>Loading...</p>}
+      {user && (
+        <div>
+          <h2>{user.name}</h2>
+          <p>{user.email}</p>
+        </div>
+      )}
+    </div>
+  );
+}
+```
 
-> "The best way to predict the future is to invent it." - Alan Kay
+## Custom Hooks with TypeScript
 
-### Links and Images
+Create reusable logic with properly typed custom hooks:
 
-You can add [links](https://jekyllrb.com) and images to your posts.
+```typescript
+function useLocalStorage<T>(key: string, initialValue: T) {
+  const [storedValue, setStoredValue] = useState<T>(() => {
+    try {
+      const item = window.localStorage.getItem(key);
+      return item ? JSON.parse(item) : initialValue;
+    } catch (error) {
+      console.error(error);
+      return initialValue;
+    }
+  });
 
-## What's Next?
+  const setValue = (value: T | ((val: T) => T)) => {
+    try {
+      const valueToStore = value instanceof Function
+        ? value(storedValue)
+        : value;
+      setStoredValue(valueToStore);
+      window.localStorage.setItem(key, JSON.stringify(valueToStore));
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
-Start writing! Replace this post with your own content and begin sharing your thoughts with the world.
+  return [storedValue, setValue] as const;
+}
+```
 
-Happy blogging!
+## Best Practices
+
+1. **Use Interfaces Over Types** for object shapes
+2. **Enable Strict Mode** in tsconfig.json
+3. **Avoid `any`** - use `unknown` if type is truly unknown
+4. **Use Discriminated Unions** for complex state management
+5. **Leverage Utility Types** - `Partial`, `Pick`, `Omit`, etc.
+
+## Conclusion
+
+React with TypeScript significantly improves the developer experience and code quality. The initial learning curve pays off with fewer runtime errors and better maintainability.
+
+Start small, gradually add types to your existing projects, and watch your confidence in refactoring grow!
