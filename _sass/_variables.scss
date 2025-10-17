@@ -13,9 +13,14 @@ $gray: #666;
 $lightGray: #eee;
 $white: #fff;
 
-// Font stacks
-$helvetica: Helvetica, Arial, sans-serif;
-$helveticaNeue: "Helvetica Neue", Helvetica, Arial, sans-serif;
+// Font stacks - Modern, coding-friendly fonts
+$sansSerif: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif;
+$monospace: "Fira Code", "JetBrains Mono", "SF Mono", "Cascadia Code", "Consolas", "Monaco", "Courier New", monospace;
+$headingFont: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", sans-serif;
+
+// Legacy font variables (for backwards compatibility)
+$helvetica: $sansSerif;
+$helveticaNeue: $sansSerif;
 $georgia: Georgia, serif;
 
 // Mobile breakpoints

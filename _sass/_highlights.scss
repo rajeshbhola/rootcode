@@ -1,7 +1,9 @@
 // Modern, Beautiful Code Block Styling
 // Inspired by VS Code Dark+ theme with enhancements
 
-.highlight {
+// Handle both div.highlight and pre.highlight (Kramdown variations)
+.highlight,
+div.highlighter-rouge {
   background: linear-gradient(135deg, #1e1e1e 0%, #252526 100%);
   padding: 20px;
   border-radius: 8px;
@@ -11,10 +13,13 @@
               inset 0 1px 0 rgba(255, 255, 255, 0.05);
   margin: 24px 0;
   overflow-x: auto;
+  overflow-y: auto;
+  max-height: 500px;
   position: relative;
 
-  // Smooth scrollbar
+  // Smooth scrollbar for horizontal
   &::-webkit-scrollbar {
+    width: 8px;
     height: 8px;
   }
 
@@ -32,16 +37,9 @@
     }
   }
 
-  // Subtle top border accent
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 3px;
-    background: linear-gradient(90deg, #4183C4 0%, #268BD2 100%);
-    border-radius: 8px 8px 0 0;
+  // Custom scrollbar corner
+  &::-webkit-scrollbar-corner {
+    background: #1e1e1e;
   }
 
   pre {
@@ -49,15 +47,49 @@
     padding: 0;
     background: transparent;
     border: none;
+    overflow: visible;
+    white-space: pre;
+  }
+
+  code {
+    display: block;
+    overflow: visible;
+  }
+
+  // Remove nested highlight styling
+  .highlight {
+    background: none;
+    padding: 0;
+    margin: 0;
+    border: none;
+    box-shadow: none;
+    border-radius: 0;
+    overflow: visible;
+    max-height: none;
   }
 }
 
+// Specifically target the wrapper to prevent double styling
+div.highlighter-rouge .highlight {
+  background: none;
+  padding: 0;
+  margin: 0;
+  border: none;
+  box-shadow: none;
+  border-radius: 0;
+  border-top: none;
+  border-image: none;
+  overflow: visible;
+  max-height: none;
+}
+
 code {
-  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  font-family: $monospace;
   font-size: 14px;
   line-height: 1.6;
   font-weight: 400;
-  letter-spacing: 0.3px;
+  letter-spacing: 0;
+  font-feature-settings: "liga" 1, "calt" 1; /* Enable ligatures for Fira Code */
 }
 
 // Inline code styling
@@ -145,77 +177,57 @@ p code, li code, td code {
   .il { color: #b5cea8; } /* Literal.Number.Integer.Long */
 }
 
-// Language-specific enhancements
-.language-bash .highlight,
-.language-shell .highlight {
-  &::before {
-    background: linear-gradient(90deg, #4CAF50 0%, #45a049 100%);
-  }
-}
+// Language-specific enhancements (removed colored borders for cleaner look)
 
-.language-python .highlight {
-  &::before {
-    background: linear-gradient(90deg, #3776ab 0%, #ffd343 100%);
-  }
-}
-
-.language-javascript .highlight,
-.language-js .highlight {
-  &::before {
-    background: linear-gradient(90deg, #f7df1e 0%, #f0db4f 100%);
-  }
-}
-
-.language-typescript .highlight,
-.language-ts .highlight {
-  &::before {
-    background: linear-gradient(90deg, #007acc 0%, #3178c6 100%);
-  }
-}
-
-.language-ruby .highlight {
-  &::before {
-    background: linear-gradient(90deg, #cc342d 0%, #d91e18 100%);
-  }
-}
-
-.language-go .highlight {
-  &::before {
-    background: linear-gradient(90deg, #00add8 0%, #5dc9e2 100%);
-  }
-}
-
-.language-yaml .highlight,
-.language-yml .highlight {
-  &::before {
-    background: linear-gradient(90deg, #cb171e 0%, #db3026 100%);
-  }
-}
-
-// Add copy button styling (optional enhancement)
-.highlight-wrapper {
-  position: relative;
-
-  .copy-button {
+// Copy button styling
+.highlight,
+div.highlighter-rouge {
+  .copy-code-button {
     position: absolute;
-    top: 10px;
-    right: 10px;
+    top: 12px;
+    right: 12px;
     padding: 6px 12px;
-    background: rgba(255, 255, 255, 0.1);
-    color: #d4d4d4;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(65, 131, 196, 0.8);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 4px;
     font-size: 12px;
+    font-weight: 500;
     cursor: pointer;
-    transition: all 0.2s;
+    transition: all 0.2s ease;
+    z-index: 10;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    opacity: 0;
+    transform: translateY(-2px);
+
+    &::before {
+      content: '📋';
+      font-size: 14px;
+    }
 
     &:hover {
-      background: rgba(255, 255, 255, 0.2);
-      border-color: rgba(255, 255, 255, 0.2);
+      background: rgba(65, 131, 196, 1);
+      border-color: rgba(255, 255, 255, 0.3);
+      transform: translateY(0);
     }
 
     &:active {
       transform: scale(0.95);
     }
+
+    &.copied {
+      background: rgba(76, 175, 80, 0.9);
+
+      &::before {
+        content: '✓';
+      }
+    }
+  }
+
+  &:hover .copy-code-button {
+    opacity: 1;
   }
 }
