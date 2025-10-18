@@ -15,6 +15,7 @@ permalink: /posts/
       <h1><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></h1>
 
       <div class="post-meta">
+        <img src="{{ site.author_image }}" alt="{{ site.author }}" class="post-author-image" />
         <span class="post-author">{{ site.author }}</span>
         <span class="meta-separator">•</span>
         <span class="post-date">{{ post.date | date: "%B %d, %Y" }}</span>

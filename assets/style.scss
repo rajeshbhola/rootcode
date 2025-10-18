@@ -604,6 +604,14 @@ nav.main-nav {
     font-size: 14px;
     color: $gray;
 
+    .post-author-image {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #e9ecef;
+    }
+
     .post-author {
       font-weight: 500;
       color: #495057;
