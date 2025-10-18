@@ -1197,8 +1197,52 @@ footer {
   }
 }
 
-// Categories and Tags Meta
-.post-meta-tags {
+// Categories and Tags Meta (for single post pages)
+.post.detailed .post-meta-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 24px;
+  padding: 0;
+  border: none;
+
+  .category-badge,
+  .tag-badge {
+    display: inline-block;
+    padding: 6px 14px;
+    font-size: 13px;
+    font-weight: 500;
+    border-radius: 20px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+
+  .category-badge {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: $white;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(102, 126, 234, 0.3);
+    }
+  }
+
+  .tag-badge {
+    background: #f1f3f5;
+    color: #495057;
+    border: 1px solid #dee2e6;
+
+    &:hover {
+      background: #e9ecef;
+      border-color: #667eea;
+      color: #667eea;
+      transform: translateY(-2px);
+    }
+  }
+}
+
+// Categories and Tags Meta (for post cards)
+.posts .post .post-meta-tags {
   display: flex;
   flex-wrap: wrap;
   gap: 16px;
@@ -1440,6 +1484,102 @@ footer {
           }
         }
       }
+    }
+  }
+}
+
+// Related Posts Section
+.related-posts {
+  margin-top: 60px;
+  padding-top: 40px;
+  border-top: 2px solid #e9ecef;
+
+  h3 {
+    font-size: 28px;
+    font-weight: 700;
+    color: $darkerGray;
+    margin-bottom: 30px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    &::before {
+      content: "📚";
+      font-size: 32px;
+    }
+  }
+
+  .related-posts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 24px;
+
+    @include mobile {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+  }
+
+  .related-post-card {
+    background: $white;
+    border: 1px solid #e9ecef;
+    border-radius: 12px;
+    padding: 24px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+
+    &:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+      border-color: #667eea;
+    }
+
+    h4 {
+      margin: 0 0 12px 0;
+      font-size: 18px;
+      font-weight: 600;
+      line-height: 1.4;
+
+      a {
+        color: $darkerGray;
+        text-decoration: none;
+        transition: color 0.2s ease;
+
+        &:hover {
+          color: #667eea;
+        }
+      }
+    }
+
+    .related-post-meta {
+      margin-bottom: 12px;
+      font-size: 13px;
+      color: $gray;
+
+      .post-date {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+
+        &::before {
+          content: "📅";
+          font-size: 14px;
+        }
+      }
+    }
+
+    .related-post-excerpt {
+      font-size: 14px;
+      line-height: 1.6;
+      color: #4a5568;
+      margin: 0;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
   }
 }

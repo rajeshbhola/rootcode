@@ -7,6 +7,22 @@ layout: default
 <article class="post detailed">
   <h1>{{ page.title }}</h1>
 
+  {% if page.categories.size > 0 or page.tags.size > 0 %}
+  <div class="post-meta-tags">
+    {% if page.categories.size > 0 %}
+      {% for category in page.categories %}
+      <a href="{{ site.baseurl }}/categories#{{ category | slugify }}" class="category-badge">{{ category }}</a>
+      {% endfor %}
+    {% endif %}
+
+    {% if page.tags.size > 0 %}
+      {% for tag in page.tags %}
+      <a href="{{ site.baseurl }}/tags#{{ tag | slugify }}" class="tag-badge">{{ tag }}</a>
+      {% endfor %}
+    {% endif %}
+  </div>
+  {% endif %}
+
   <div class="author-meta">
     <img src="{{ site.author_image }}" alt="{{ site.author }}" class="author-image" />
     <div class="author-info">
@@ -17,28 +33,6 @@ layout: default
     </div>
   </div>
 
-  {% if page.categories.size > 0 or page.tags.size > 0 %}
-  <div class="post-meta-tags">
-    {% if page.categories.size > 0 %}
-    <div class="post-categories">
-      <span class="meta-label">Categories:</span>
-      {% for category in page.categories %}
-      <a href="{{ site.baseurl }}/categories#{{ category | slugify }}" class="category-badge">{{ category }}</a>
-      {% endfor %}
-    </div>
-    {% endif %}
-
-    {% if page.tags.size > 0 %}
-    <div class="post-tags">
-      <span class="meta-label">Tags:</span>
-      {% for tag in page.tags %}
-      <a href="{{ site.baseurl }}/tags#{{ tag | slugify }}" class="tag-badge">{{ tag }}</a>
-      {% endfor %}
-    </div>
-    {% endif %}
-  </div>
-  {% endif %}
-
   <div class="entry">
     {{ content }}
   </div>
@@ -46,6 +40,41 @@ layout: default
   <div class="date">
     Written on {{ page.date | date: "%B %e, %Y" }}
   </div>
+
+  {% assign related_posts = '' | split: '' %}
+  {% for category in page.categories %}
+    {% for post in site.categories[category] %}
+      {% if post.url != page.url %}
+        {% assign related_posts = related_posts | push: post %}
+      {% endif %}
+    {% endfor %}
+  {% endfor %}
+
+  {% assign unique_posts = '' | split: '' %}
+  {% for post in related_posts %}
+    {% unless unique_posts contains post %}
+      {% assign unique_posts = unique_posts | push: post %}
+    {% endunless %}
+  {% endfor %}
+
+  {% assign sorted_posts = unique_posts | sort: 'date' | reverse %}
+
+  {% if sorted_posts.size > 0 %}
+  <div class="related-posts">
+    <h3>Related Posts</h3>
+    <div class="related-posts-grid">
+      {% for post in sorted_posts limit:6 %}
+      <article class="related-post-card" onclick="window.location='{{ site.baseurl }}{{ post.url }}'">
+        <h4><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></h4>
+        <div class="related-post-meta">
+          <span class="post-date">{{ post.date | date: "%B %d, %Y" }}</span>
+        </div>
+        <p class="related-post-excerpt">{{ post.excerpt | strip_html | truncatewords: 20 }}</p>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+  {% endif %}
 
   {% include disqus.html %}
 </article>
