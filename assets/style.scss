@@ -261,6 +261,10 @@ img {
   }
 
   &.active {
+    .hamburger-line {
+      background: $darkGray;
+    }
+
     .hamburger-line:nth-child(1) {
       transform: translateY(10px) rotate(45deg);
     }
@@ -285,6 +289,9 @@ nav.main-nav {
   margin-top: 23px;
   font-family: $sansSerif;
   font-size: 16px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
 
   @include mobile {
     position: fixed;
@@ -301,6 +308,7 @@ nav.main-nav {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    gap: 0;
 
     &.active {
       right: 0;
@@ -308,7 +316,7 @@ nav.main-nav {
   }
 
   a {
-    margin-left: 20px;
+    margin-left: 0;
     color: $white;
     text-align: right;
     font-weight: 500;
@@ -332,6 +340,79 @@ nav.main-nav {
       &:hover {
         color: #667eea;
         padding-left: 8px;
+      }
+    }
+  }
+
+  .search-box-wrapper {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+
+    @include mobile {
+      width: 100%;
+      margin-bottom: 24px;
+    }
+
+    .search-input {
+      width: 200px;
+      padding: 8px 36px 8px 12px;
+      background: rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 20px;
+      color: $white;
+      font-size: 14px;
+      font-family: $sansSerif;
+      transition: all 0.3s ease;
+      cursor: pointer;
+
+      &::placeholder {
+        color: rgba(255, 255, 255, 0.7);
+      }
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.2);
+        border-color: rgba(255, 255, 255, 0.5);
+      }
+
+      &:focus {
+        outline: none;
+        background: rgba(255, 255, 255, 0.25);
+        border-color: rgba(255, 255, 255, 0.6);
+      }
+
+      @include mobile {
+        width: 100%;
+        background: #f8f9fa;
+        color: $darkGray;
+        border-color: #dee2e6;
+
+        &::placeholder {
+          color: $gray;
+        }
+
+        &:hover {
+          background: #e9ecef;
+          border-color: #667eea;
+        }
+
+        &:focus {
+          background: $white;
+          border-color: #667eea;
+        }
+      }
+    }
+
+    .search-icon {
+      position: absolute;
+      right: 12px;
+      width: 18px;
+      height: 18px;
+      color: rgba(255, 255, 255, 0.8);
+      pointer-events: none;
+
+      @include mobile {
+        color: $gray;
       }
     }
   }
@@ -1045,6 +1126,19 @@ footer {
     margin: 0;
     font-weight: 400;
   }
+}
+
+// Reading Progress Bar
+.reading-progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 4px;
+  background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+  z-index: 9999;
+  transition: width 0.1s ease-out;
+  box-shadow: 0 2px 4px rgba(102, 126, 234, 0.3);
 }
 
 // Scroll to Top Button
