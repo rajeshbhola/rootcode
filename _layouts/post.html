@@ -5,11 +5,14 @@ layout: default
 <article class="post detailed">
   <h1>{{ page.title }}</h1>
 
-  <div>
-    <p class="author_title">{{site.author}}  ·  {{ page.date | date: "%B %e, %Y" }}</p>
-    {% if page.last_modified_at %}
-    <p class="author_title">Updated:  {{ page.last_modified_at | date: "%B %e, %Y" }}</p>
-    {% endif %}
+  <div class="author-meta">
+    <img src="{{ site.author_image }}" alt="{{ site.author }}" class="author-image" />
+    <div class="author-info">
+      <p class="author_title">{{site.author}}  ·  {{ page.date | date: "%B %e, %Y" }}</p>
+      {% if page.last_modified_at %}
+      <p class="author_title">Updated:  {{ page.last_modified_at | date: "%B %e, %Y" }}</p>
+      {% endif %}
+    </div>
   </div>
 
   <div class="entry">

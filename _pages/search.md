@@ -4,8 +4,6 @@ title: Search
 permalink: /search/
 ---
 
-# Search
-
 <div class="search-container">
   <input type="text" id="search-input" placeholder="Search blog posts..." />
   <div id="search-results"></div>
@@ -81,13 +79,3 @@ SimpleJekyllSearch({
   color: #999;
 }
 </style>
-
----
-
-**Note**: The search functionality requires the Simple Jekyll Search plugin. If you haven't set it up yet, follow these steps:
-
-1. Download [simple-jekyll-search.min.js](https://github.com/christian-fei/Simple-Jekyll-Search/blob/master/dest/simple-jekyll-search.min.js)
-2. Save it to `assets/simple-jekyll-search.min.js`
-3. Create `search.json` in the root directory (see Getting Started guide)
-
-The search will work across all your blog post titles, content, and categories.

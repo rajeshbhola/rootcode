@@ -108,17 +108,49 @@
       currentList.appendChild(li);
     });
 
-    // Insert TOC after the post title
-    const postTitle = postContent.querySelector('h1');
-    if (postTitle && postTitle.nextSibling) {
-      postTitle.parentNode.insertBefore(tocContainer, postTitle.nextSibling);
+    // Create a container for TOC and entry in sidebar layout
+    const entryDiv = postContent.querySelector('.entry');
+
+    if (entryDiv) {
+      // Create post-container div
+      const postContainer = document.createElement('div');
+      postContainer.className = 'post-container';
+
+      // Wrap entry in the container
+      entryDiv.parentNode.insertBefore(postContainer, entryDiv);
+      postContainer.appendChild(tocContainer);
+      postContainer.appendChild(entryDiv);
     } else {
-      postContent.insertBefore(tocContainer, postContent.firstChild);
+      // Fallback: insert after all metadata
+      const authorTitle = postContent.querySelector('.author_title');
+      const dateDiv = postContent.querySelector('.date');
+
+      let insertionPoint = null;
+      if (authorTitle && authorTitle.nextElementSibling) {
+        const nextAuthor = authorTitle.nextElementSibling;
+        if (nextAuthor && nextAuthor.classList.contains('author_title')) {
+          insertionPoint = nextAuthor;
+        } else {
+          insertionPoint = authorTitle;
+        }
+      } else if (dateDiv) {
+        insertionPoint = dateDiv;
+      } else {
+        const postTitle = postContent.querySelector('h1');
+        insertionPoint = postTitle;
+      }
+
+      if (insertionPoint && insertionPoint.nextSibling) {
+        insertionPoint.parentNode.insertBefore(tocContainer, insertionPoint.nextSibling);
+      } else if (insertionPoint) {
+        insertionPoint.parentNode.appendChild(tocContainer);
+      } else {
+        postContent.insertBefore(tocContainer, postContent.firstChild);
+      }
     }
 
     // Toggle functionality
     const toggleButton = tocContainer.querySelector('.toc-toggle');
-    const tocContent = tocContainer.querySelector('.toc-content');
     const tocIcon = toggleButton.querySelector('.toc-icon');
 
     toggleButton.addEventListener('click', function() {
