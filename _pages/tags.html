@@ -8,20 +8,23 @@ permalink: /tags/
   <div class="tag-cloud">
     {% assign tags = site.tags | sort %}
     {% for tag in tags %}
-      <a href="#{{ tag[0] | slugify }}" class="tag-cloud-item" data-count="{{ tag[1].size }}">
+      <a href="javascript:void(0);" class="tag-cloud-item" data-tag="{{ tag[0] | slugify }}" data-count="{{ tag[1].size }}">
         {{ tag[0] }} <span class="tag-count">{{ tag[1].size }}</span>
       </a>
     {% endfor %}
   </div>
 
-  <div class="tags-list">
+  <div class="tags-list" style="display: none;">
     {% for tag in tags %}
-      <div class="tag-group">
-        <h2 id="{{ tag[0] | slugify }}">
-          <span class="tag-icon">🏷️</span>
-          {{ tag[0] }}
-          <span class="tag-count-badge">{{ tag[1].size }}</span>
-        </h2>
+      <div class="tag-group" data-tag="{{ tag[0] | slugify }}">
+        <div class="tag-header">
+          <h2 id="{{ tag[0] | slugify }}">
+            <span class="tag-icon">🏷️</span>
+            {{ tag[0] }}
+            <span class="tag-count-badge">{{ tag[1].size }}</span>
+          </h2>
+          <button class="back-to-tags" onclick="showAllTags()">← Back to all tags</button>
+        </div>
         <ul class="post-list">
           {% assign posts = tag[1] | sort: 'date' | reverse %}
           {% for post in posts %}
@@ -35,3 +38,62 @@ permalink: /tags/
     {% endfor %}
   </div>
 </div>
+
+<script>
+(function() {
+  'use strict';
+
+  const tagCloud = document.querySelector('.tag-cloud');
+  const tagsList = document.querySelector('.tags-list');
+  const tagGroups = document.querySelectorAll('.tag-group');
+  const tagCloudItems = document.querySelectorAll('.tag-cloud-item');
+
+  // Add click handlers to tag cloud items
+  tagCloudItems.forEach(item => {
+    item.addEventListener('click', function(e) {
+      e.preventDefault();
+      const tagId = this.getAttribute('data-tag');
+      showTagPosts(tagId);
+    });
+  });
+
+  function showTagPosts(tagId) {
+    // Hide tag cloud
+    tagCloud.style.display = 'none';
+
+    // Show tags list container
+    tagsList.style.display = 'block';
+
+    // Hide all tag groups
+    tagGroups.forEach(group => {
+      group.style.display = 'none';
+    });
+
+    // Show only the selected tag group
+    const selectedGroup = document.querySelector(`.tag-group[data-tag="${tagId}"]`);
+    if (selectedGroup) {
+      selectedGroup.style.display = 'block';
+    }
+
+    // Scroll to top
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  window.showAllTags = function() {
+    // Show tag cloud
+    tagCloud.style.display = 'flex';
+
+    // Hide tags list
+    tagsList.style.display = 'none';
+
+    // Scroll to top
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  // Check if there's a hash in the URL on page load
+  if (window.location.hash) {
+    const tagId = window.location.hash.substring(1);
+    showTagPosts(tagId);
+  }
+})();
+</script>

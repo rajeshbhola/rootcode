@@ -1421,15 +1421,25 @@ footer {
     .tag-group {
       margin-bottom: 40px;
 
+      .tag-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+        flex-wrap: wrap;
+        gap: 16px;
+      }
+
       h2 {
         display: flex;
         align-items: center;
         gap: 10px;
         font-size: 28px;
-        margin-bottom: 20px;
+        margin: 0;
         padding-bottom: 12px;
         border-bottom: 2px solid #dee2e6;
         color: $darkerGray;
+        flex: 1;
 
         .tag-icon {
           font-size: 24px;
@@ -1443,6 +1453,34 @@ footer {
           padding: 4px 10px;
           border-radius: 12px;
           margin-left: auto;
+        }
+      }
+
+      .back-to-tags {
+        padding: 10px 20px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: $white;
+        border: none;
+        border-radius: 6px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        box-shadow: 0 2px 8px rgba(102, 126, 234, 0.2);
+
+        &:hover {
+          background: linear-gradient(135deg, darken(#667eea, 5%) 0%, darken(#764ba2, 5%) 100%);
+          transform: translateY(-2px);
+          box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+
+        &:active {
+          transform: translateY(0);
+        }
+
+        &:focus {
+          outline: 2px solid #667eea;
+          outline-offset: 2px;
         }
       }
 
