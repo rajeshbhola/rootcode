@@ -1,0 +1,27 @@
+---
+layout: page
+title: Categories
+permalink: /categories/
+---
+
+<div class="categories-page">
+  {% assign categories = site.categories | sort %}
+  {% for category in categories %}
+    <div class="category-group">
+      <h2 id="{{ category[0] | slugify }}">
+        <span class="category-icon">#</span>
+        {{ category[0] }}
+        <span class="category-count">{{ category[1].size }}</span>
+      </h2>
+      <ul class="post-list">
+        {% assign posts = category[1] | sort: 'date' | reverse %}
+        {% for post in posts %}
+          <li>
+            <a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a>
+            <span class="post-date">{{ post.date | date: "%B %d, %Y" }}</span>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+  {% endfor %}
+</div>

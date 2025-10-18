@@ -2,6 +2,7 @@
 layout: post
 title: Building Scalable Microservices with Docker and Kubernetes
 categories: [DevOps, Docker, Kubernetes, Microservices]
+tags: [docker, kubernetes, devops, microservices, containers, orchestration]
 excerpt: Learn how to containerize applications with Docker and orchestrate them with Kubernetes for production-ready microservices architecture.
 ---
 

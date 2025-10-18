@@ -1,14 +1,16 @@
 ---
 layout: default
+title: All Posts
+permalink: /posts/
 ---
 
-<div class="home-hero">
-  <h1>Latest Posts</h1>
-  <p>Explore the latest articles on web development, programming, and technology</p>
+<div class="posts-page-header">
+  <h1>All Posts</h1>
+  <p>Browse all articles from RootCode</p>
 </div>
 
 <div class="posts">
-  {% for post in site.posts limit:6 %}
+  {% for post in site.posts %}
     <article class="post" onclick="window.location='{{ site.baseurl }}{{ post.url }}'">
       <h1><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></h1>
 
@@ -23,8 +25,4 @@ layout: default
       <a href="{{ site.baseurl }}{{ post.url }}" class="read-more" onclick="event.stopPropagation();">Read More</a>
     </article>
   {% endfor %}
-</div>
-
-<div class="view-all-posts">
-  <a href="{{ site.baseurl }}/posts/" class="view-all-btn">View All Posts</a>
 </div>

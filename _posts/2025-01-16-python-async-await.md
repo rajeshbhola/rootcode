@@ -2,6 +2,7 @@
 layout: post
 title: Mastering Python Async/Await for High-Performance Applications
 categories: [Python, Async Programming, Performance]
+tags: [python, async, asyncio, concurrency, performance, backend]
 excerpt: Dive deep into Python's asynchronous programming with async/await. Learn how to write concurrent code that's both fast and readable.
 ---
 

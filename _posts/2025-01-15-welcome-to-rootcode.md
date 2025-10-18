@@ -2,6 +2,7 @@
 layout: post
 title: Building Modern Web Applications with React and TypeScript
 categories: [Web Development, React, TypeScript]
+tags: [react, typescript, frontend, web-development, hooks, components]
 excerpt: Learn how to build scalable, type-safe web applications using React and TypeScript. This comprehensive guide covers best practices, project setup, and advanced patterns.
 ---
 
