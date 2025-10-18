@@ -1022,11 +1022,14 @@ nav.main-nav {
   align-items: center;
   justify-content: center;
   gap: 12px;
-  margin: 60px 0;
+  margin: 60px 0 20px 0;
   padding: 20px;
   flex-wrap: wrap;
 
   .pagination-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
     padding: 10px 20px;
     background: $white;
     color: #667eea;
@@ -1036,6 +1039,11 @@ nav.main-nav {
     font-size: 14px;
     text-decoration: none;
     transition: all 0.2s ease;
+
+    svg {
+      width: 16px;
+      height: 16px;
+    }
 
     &:hover {
       background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -1095,6 +1103,12 @@ nav.main-nav {
     }
   }
 
+  .pagination-ellipsis {
+    padding: 0 4px;
+    color: $gray;
+    font-weight: 600;
+  }
+
   @include mobile {
     .pagination-numbers {
       .pagination-number {
@@ -1108,6 +1122,17 @@ nav.main-nav {
       padding: 8px 16px;
       font-size: 13px;
     }
+  }
+}
+
+.pagination-info {
+  text-align: center;
+  margin: 0 0 40px 0;
+
+  p {
+    font-size: 14px;
+    color: $gray;
+    margin: 0;
   }
 }
 
