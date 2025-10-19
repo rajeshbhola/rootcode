@@ -16,6 +16,18 @@
 
     <meta name="theme-color" content="#000000">
     <link rel="icon" type="image/png" sizes="32x32" href="{{ site.baseurl }}/images/favicon-32x32.png">
+
+    <!-- Prevent flash of white background - Apply dark theme immediately -->
+    <script>
+      (function() {
+        const savedTheme = localStorage.getItem('rootcode-theme');
+        const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
+        const theme = savedTheme || (prefersDark ? 'light' : 'dark');
+        if (theme === 'dark') {
+          document.documentElement.setAttribute('data-theme', 'dark');
+        }
+      })();
+    </script>
   </head>
 
   <body>
