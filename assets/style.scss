@@ -271,7 +271,7 @@ img {
 
   &.active {
     .hamburger-line {
-      background: var(--text-secondary);
+      background: white;
     }
 
     .hamburger-line:nth-child(1) {
@@ -288,7 +288,7 @@ img {
   }
 
   &:focus {
-    outline: 2px solid $blue;
+    outline: 2px solid white;
     outline-offset: 2px;
   }
 }
