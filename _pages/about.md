@@ -16,7 +16,7 @@ permalink: /about/
       </div>
     </div>
     <h1 class="about-title">{{ site.author }}</h1>
-    <p class="about-tagline">Full Stack Developer • AI Enthusiast • DevOps Engineer</p>
+    <p class="about-tagline">Full Stack Developer & AI Enthusiast</p>
     <div class="about-social-links">
       <a href="https://github.com/rajeshbhola" target="_blank" rel="noopener" class="social-link">
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
@@ -102,24 +102,6 @@ permalink: /about/
         <p>I believe in continuous learning and sharing knowledge with the community. This blog is my way of documenting what I learn and helping others avoid the pitfalls I've encountered along the way.</p>
       </div>
 
-      <!-- Skills Tags -->
-      <div class="skills-section">
-        <h3>Tech Stack</h3>
-        <div class="skills-grid">
-          <span class="skill-tag">JavaScript</span>
-          <span class="skill-tag">TypeScript</span>
-          <span class="skill-tag">Python</span>
-          <span class="skill-tag">React</span>
-          <span class="skill-tag">Node.js</span>
-          <span class="skill-tag">Docker</span>
-          <span class="skill-tag">Kubernetes</span>
-          <span class="skill-tag">AWS</span>
-          <span class="skill-tag">PostgreSQL</span>
-          <span class="skill-tag">MongoDB</span>
-          <span class="skill-tag">Redis</span>
-          <span class="skill-tag">CI/CD</span>
-        </div>
-      </div>
     </div>
 
     <!-- CTA Section -->

@@ -159,26 +159,52 @@
       tocIcon.textContent = isExpanded ? '+' : '−';
     });
 
-    // Highlight active section on scroll
-    let scrollTimeout;
-    window.addEventListener('scroll', function() {
-      clearTimeout(scrollTimeout);
-      scrollTimeout = setTimeout(updateActiveSection, 100);
-    });
+    // Highlight active section on scroll using IntersectionObserver
+    const observerOptions = {
+      rootMargin: '-100px 0px -66%',
+      threshold: 0
+    };
 
-    function updateActiveSection() {
-      const scrollPosition = window.pageYOffset + 100;
+    let activeHeadingId = null;
 
-      headings.forEach(function(heading) {
-        const headingTop = heading.offsetTop;
-        const link = tocContainer.querySelector('a[href="#' + heading.id + '"]');
-
-        if (link) {
-          if (scrollPosition >= headingTop) {
+    const observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          activeHeadingId = entry.target.id;
+          const link = tocContainer.querySelector('a[href="#' + activeHeadingId + '"]');
+          if (link) {
             updateActiveLink(link);
           }
         }
       });
+    }, observerOptions);
+
+    // Observe all headings
+    headings.forEach(function(heading) {
+      observer.observe(heading);
+    });
+
+    // Fallback scroll-based detection for better initial state
+    function updateActiveSection() {
+      let currentActive = null;
+      let closestDistance = Infinity;
+
+      headings.forEach(function(heading) {
+        const rect = heading.getBoundingClientRect();
+        const distance = Math.abs(rect.top - 100);
+
+        if (rect.top <= 200 && distance < closestDistance) {
+          closestDistance = distance;
+          currentActive = heading;
+        }
+      });
+
+      if (currentActive) {
+        const link = tocContainer.querySelector('a[href="#' + currentActive.id + '"]');
+        if (link) {
+          updateActiveLink(link);
+        }
+      }
     }
 
     function updateActiveLink(activeLink) {

@@ -129,7 +129,7 @@ permalink: /posts/
     const start = (currentPage - 1) * postsPerPage + 1;
     const end = Math.min(currentPage * postsPerPage, totalPosts);
     paginationInfo.querySelector('p').textContent =
-      `Page ${currentPage} of ${totalPages} • Showing ${postsPerPage} of ${totalPosts} posts`;
+      `Page ${currentPage} of ${totalPages}`;
   }
 
   // Event listeners
