@@ -498,7 +498,7 @@ nav.main-nav {
 
     @include mobile {
       background: var(--bg-secondary);
-      border: 1px solid var(--border-secondary);
+      border-color: var(--border-secondary);
       width: 100%;
       height: 48px;
       border-radius: 8px;
@@ -624,10 +624,7 @@ nav.main-nav {
   h1 {
     font-size: 38px;
     font-weight: 700;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: $darkerGray;
     margin: 0 0 12px 0;
 
     @include mobile {
@@ -637,7 +634,7 @@ nav.main-nav {
 
   p {
     font-size: 18px;
-    color: var(--text-tertiary);
+    color: $gray;
     margin: 0;
 
     @include mobile {
@@ -851,7 +848,7 @@ nav.main-nav {
     font-weight: 700;
     line-height: 1.2;
     margin-bottom: 16px;
-    color: var(--text-primary);
+    color: $darkerGray;
   }
 
   .author-meta {
@@ -1134,7 +1131,7 @@ nav.main-nav {
     align-items: center;
     gap: 8px;
     padding: 10px 20px;
-    background: var(--card-bg);
+    background: $white;
     color: #667eea;
     border: 2px solid #667eea;
     border-radius: 6px;
@@ -1158,12 +1155,12 @@ nav.main-nav {
     &.disabled {
       opacity: 0.4;
       cursor: not-allowed;
-      border-color: var(--border-secondary);
-      color: var(--text-tertiary);
+      border-color: $gray;
+      color: $gray;
 
       &:hover {
-        background: var(--card-bg);
-        color: var(--text-tertiary);
+        background: $white;
+        color: $gray;
         transform: none;
         box-shadow: none;
       }
@@ -1182,9 +1179,9 @@ nav.main-nav {
     justify-content: center;
     width: 40px;
     height: 40px;
-    background: var(--card-bg);
-    color: var(--text-secondary);
-    border: 1px solid var(--border-secondary);
+    background: $white;
+    color: $darkGray;
+    border: 1px solid #dee2e6;
     border-radius: 6px;
     font-weight: 500;
     font-size: 14px;
@@ -1192,7 +1189,7 @@ nav.main-nav {
     transition: all 0.2s ease;
 
     &:hover {
-      background: var(--bg-secondary);
+      background: #f8f9fa;
       border-color: #667eea;
       color: #667eea;
     }
@@ -1208,7 +1205,7 @@ nav.main-nav {
 
   .pagination-ellipsis {
     padding: 0 4px;
-    color: var(--text-tertiary);
+    color: $gray;
     font-weight: 600;
   }
 
@@ -1234,7 +1231,7 @@ nav.main-nav {
 
   p {
     font-size: 14px;
-    color: var(--text-tertiary);
+    color: $gray;
     margin: 0;
   }
 }
@@ -2146,12 +2143,12 @@ footer {
 .related-posts {
   margin-top: 60px;
   padding-top: 40px;
-  border-top: 2px solid var(--border-primary);
+  border-top: 2px solid #e9ecef;
 
   h3 {
     font-size: 28px;
     font-weight: 700;
-    color: var(--text-primary);
+    color: $darkerGray;
     margin-bottom: 30px;
     display: flex;
     align-items: center;
