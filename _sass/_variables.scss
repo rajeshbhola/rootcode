@@ -2,7 +2,7 @@
 // VARIABLES
 //
 
-// Colors
+// Legacy Colors (for backwards compatibility in SCSS)
 $blue: #4183C4;
 
 // Grays
@@ -12,6 +12,91 @@ $darkGray: #333;
 $gray: #666;
 $lightGray: #eee;
 $white: #fff;
+
+// CSS Custom Properties for Theme Support
+:root {
+  // Light Mode (Default)
+  --bg-primary: #ffffff;
+  --bg-secondary: #f8f9fa;
+  --bg-tertiary: #e9ecef;
+  --bg-gradient-start: rgba(102, 126, 234, 0.05);
+  --bg-gradient-end: rgba(118, 75, 162, 0.05);
+
+  --text-primary: #222222;
+  --text-secondary: #333333;
+  --text-tertiary: #666666;
+  --text-muted: #6c757d;
+
+  --border-primary: #e9ecef;
+  --border-secondary: #dee2e6;
+  --border-hover: #667eea;
+
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.12);
+  --shadow-lg: 0 12px 24px rgba(0, 0, 0, 0.15);
+
+  --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --gradient-hover: linear-gradient(135deg, #5a6fd8 0%, #6a4290 100%);
+
+  --code-bg: #f6f8fa;
+  --code-color: #d73a49;
+
+  --card-bg: #ffffff;
+  --card-hover-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+
+  --input-bg: rgba(255, 255, 255, 0.15);
+  --input-border: rgba(255, 255, 255, 0.3);
+  --input-text: #ffffff;
+
+  --scrollbar-track: transparent;
+  --scrollbar-thumb: #cbd5e0;
+  --scrollbar-thumb-hover: #a0aec0;
+
+  --selection-bg: #eeeeee;
+  --selection-text: #000000;
+}
+
+[data-theme="dark"] {
+  // Dark Mode
+  --bg-primary: #1a1a1a;
+  --bg-secondary: #242424;
+  --bg-tertiary: #2d2d2d;
+  --bg-gradient-start: rgba(102, 126, 234, 0.12);
+  --bg-gradient-end: rgba(118, 75, 162, 0.12);
+
+  --text-primary: #e8e8e8;
+  --text-secondary: #d4d4d4;
+  --text-tertiary: #a0a0a0;
+  --text-muted: #8b8b8b;
+
+  --border-primary: #363636;
+  --border-secondary: #404040;
+  --border-hover: #667eea;
+
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 12px 24px rgba(0, 0, 0, 0.5);
+
+  --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --gradient-hover: linear-gradient(135deg, #5a6fd8 0%, #6a4290 100%);
+
+  --code-bg: #2d2d2d;
+  --code-color: #ff7b72;
+
+  --card-bg: #242424;
+  --card-hover-shadow: 0 12px 24px rgba(0, 0, 0, 0.6);
+
+  --input-bg: rgba(255, 255, 255, 0.08);
+  --input-border: rgba(255, 255, 255, 0.2);
+  --input-text: #e8e8e8;
+
+  --scrollbar-track: transparent;
+  --scrollbar-thumb: #4a4a4a;
+  --scrollbar-thumb-hover: #5a5a5a;
+
+  --selection-bg: #363636;
+  --selection-text: #ffffff;
+}
 
 // Font stacks - Modern, coding-friendly fonts
 $sansSerif: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif;

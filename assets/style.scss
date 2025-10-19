@@ -18,13 +18,22 @@ html {
 }
 
 body {
-  background: $white;
+  background: var(--bg-primary);
   font-family: $sansSerif;
   font-size: 18px;
   line-height: 1.6;
-  color: $darkGray;
+  color: var(--text-secondary);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+// Smooth theme transition
+html.theme-transition,
+html.theme-transition *,
+html.theme-transition *:before,
+html.theme-transition *:after {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease !important;
 }
 
 .container {
@@ -36,7 +45,7 @@ body {
 
 h1, h2, h3, h4, h5, h6 {
   font-family: $headingFont;
-  color: $darkerGray;
+  color: var(--text-primary);
   font-weight: 600;
   letter-spacing: -0.02em;
 
@@ -70,7 +79,7 @@ h3 {
 h4 {
   font-size: 18px;
   font-weight: 600;
-  color: $gray;
+  color: var(--text-tertiary);
 }
 
 p {
@@ -78,11 +87,11 @@ p {
 }
 
 a {
-  color: $blue;
+  color: #667eea;
   text-decoration: none;
   cursor: pointer;
   &:hover, &:active {
-    color: $blue;
+    color: #764ba2;
   }
 }
 
@@ -126,17 +135,17 @@ img {
 
 .date {
   font-style: italic;
-  color: $gray;
+  color: var(--text-tertiary);
 }
 
 // Specify the color of the selection
 ::-moz-selection {
-  color: $black;
-  background: $lightGray;
+  color: var(--selection-text);
+  background: var(--selection-bg);
 }
 ::selection {
-  color: $black;
-  background: $lightGray;
+  color: var(--selection-text);
+  background: var(--selection-bg);
 }
 
 // Nicolas Gallagher's micro clearfix hack
@@ -243,7 +252,7 @@ img {
   padding: 0;
   z-index: 1001;
   position: absolute;
-  right: 10px;
+  left: 10px;
   top: 50%;
   transform: translateY(-50%);
 
@@ -262,7 +271,7 @@ img {
 
   &.active {
     .hamburger-line {
-      background: $darkGray;
+      background: var(--text-secondary);
     }
 
     .hamburger-line:nth-child(1) {
@@ -284,6 +293,124 @@ img {
   }
 }
 
+// Theme Toggle Button - Desktop (positioned on right with nav)
+.theme-toggle-desktop {
+  float: right;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 0;
+  margin-top: 23px;
+  margin-right: 24px;
+
+  svg {
+    color: $white;
+    transition: all 0.3s ease;
+  }
+
+  .sun-icon {
+    display: none;
+  }
+
+  .moon-icon {
+    display: block;
+  }
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.25);
+    border-color: rgba(255, 255, 255, 0.5);
+    transform: scale(1.1);
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+
+  &:focus {
+    outline: 2px solid rgba(255, 255, 255, 0.5);
+    outline-offset: 2px;
+  }
+
+  @include mobile {
+    float: none;
+    position: absolute;
+    right: 60px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1001;
+    margin: 0;
+
+    &:hover {
+      transform: translateY(-50%) scale(1.1);
+    }
+
+    &:active {
+      transform: translateY(-50%) scale(0.95);
+    }
+  }
+}
+
+// Theme Toggle Button - Mobile (in nav menu)
+.theme-toggle-mobile {
+  display: none;
+
+  @include mobile {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-secondary);
+    border-color: var(--border-secondary);
+    width: 100%;
+    height: 48px;
+    border-radius: 8px;
+    margin-bottom: 24px;
+    border: 1px solid var(--border-secondary);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 0;
+
+    svg {
+      color: var(--text-secondary);
+      transition: all 0.3s ease;
+    }
+
+    .sun-icon {
+      display: none;
+    }
+
+    .moon-icon {
+      display: block;
+    }
+
+    &:hover {
+      background: var(--bg-tertiary);
+      border-color: #667eea;
+
+      svg {
+        color: #667eea;
+      }
+    }
+  }
+}
+
+[data-theme="dark"] .theme-toggle-desktop,
+[data-theme="dark"] .theme-toggle-mobile {
+  .sun-icon {
+    display: block;
+  }
+
+  .moon-icon {
+    display: none;
+  }
+}
+
 nav.main-nav {
   float: right;
   margin-top: 23px;
@@ -291,7 +418,8 @@ nav.main-nav {
   font-size: 16px;
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 16px;
+  flex-wrap: nowrap;
 
   @include mobile {
     position: fixed;
@@ -299,8 +427,8 @@ nav.main-nav {
     right: -100%;
     width: 280px;
     height: 100vh;
-    background: $white;
-    box-shadow: -4px 0 12px rgba(0, 0, 0, 0.1);
+    background: var(--bg-primary);
+    box-shadow: var(--shadow-md);
     padding: 80px 30px 30px;
     margin-top: 0;
     z-index: 1000;
@@ -331,11 +459,11 @@ nav.main-nav {
     @include mobile {
       margin: 0 0 24px 0;
       font-size: 18px;
-      color: $darkGray;
+      color: var(--text-secondary);
       width: 100%;
       text-align: left;
       padding: 12px 0;
-      border-bottom: 1px solid #e9ecef;
+      border-bottom: 1px solid var(--border-primary);
 
       &:hover {
         color: #667eea;
@@ -344,75 +472,49 @@ nav.main-nav {
     }
   }
 
-  .search-box-wrapper {
-    position: relative;
-    display: inline-flex;
+  .search-icon-link {
+    display: flex;
     align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: transparent;
+    border: none;
+    border-radius: 50%;
+    transition: all 0.3s ease;
 
-    @include mobile {
-      width: 100%;
-      margin-bottom: 24px;
+    &:hover {
+      transform: scale(1.1);
     }
 
-    .search-input {
-      width: 200px;
-      padding: 8px 36px 8px 12px;
-      background: rgba(255, 255, 255, 0.15);
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      border-radius: 20px;
-      color: $white;
-      font-size: 14px;
-      font-family: $sansSerif;
-      transition: all 0.3s ease;
-      cursor: pointer;
-
-      &::placeholder {
-        color: rgba(255, 255, 255, 0.7);
-      }
-
-      &:hover {
-        background: rgba(255, 255, 255, 0.2);
-        border-color: rgba(255, 255, 255, 0.5);
-      }
-
-      &:focus {
-        outline: none;
-        background: rgba(255, 255, 255, 0.25);
-        border-color: rgba(255, 255, 255, 0.6);
-      }
-
-      @include mobile {
-        width: 100%;
-        background: #f8f9fa;
-        color: $darkGray;
-        border-color: #dee2e6;
-
-        &::placeholder {
-          color: $gray;
-        }
-
-        &:hover {
-          background: #e9ecef;
-          border-color: #667eea;
-        }
-
-        &:focus {
-          background: $white;
-          border-color: #667eea;
-        }
-      }
+    &:active {
+      transform: scale(0.95);
     }
 
     .search-icon {
-      position: absolute;
-      right: 12px;
-      width: 18px;
-      height: 18px;
-      color: rgba(255, 255, 255, 0.8);
-      pointer-events: none;
+      color: $white;
+      transition: color 0.3s ease;
+    }
 
-      @include mobile {
-        color: $gray;
+    @include mobile {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-secondary);
+      width: 100%;
+      height: 48px;
+      border-radius: 8px;
+      margin-bottom: 24px;
+
+      .search-icon {
+        color: var(--text-secondary);
+      }
+
+      &:hover {
+        background: var(--bg-tertiary);
+        border-color: #667eea;
+
+        .search-icon {
+          color: #667eea;
+        }
       }
     }
   }
@@ -522,7 +624,10 @@ nav.main-nav {
   h1 {
     font-size: 38px;
     font-weight: 700;
-    color: $darkerGray;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
     margin: 0 0 12px 0;
 
     @include mobile {
@@ -532,7 +637,7 @@ nav.main-nav {
 
   p {
     font-size: 18px;
-    color: $gray;
+    color: var(--text-tertiary);
     margin: 0;
 
     @include mobile {
@@ -555,13 +660,12 @@ nav.main-nav {
 }
 
 .posts > .post {
-  background: $white;
+  background: var(--card-bg);
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08),
-              0 1px 4px rgba(0, 0, 0, 0.04);
+  box-shadow: var(--shadow-sm);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  border: 1px solid #e9ecef;
+  border: 1px solid var(--border-primary);
   cursor: pointer;
   display: flex;
   flex-direction: column;
@@ -571,9 +675,8 @@ nav.main-nav {
 
   &:hover {
     transform: translateY(-4px);
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12),
-                0 6px 12px rgba(0, 0, 0, 0.08);
-    border-color: #667eea;
+    box-shadow: var(--card-hover-shadow);
+    border-color: var(--border-hover);
   }
 
   h1 {
@@ -584,7 +687,7 @@ nav.main-nav {
     padding: 24px 24px 0 24px;
 
     a {
-      color: $darkerGray;
+      color: var(--text-primary);
       text-decoration: none;
       transition: color 0.2s ease;
 
@@ -601,27 +704,27 @@ nav.main-nav {
     padding: 0 24px;
     margin-bottom: 16px;
     font-size: 14px;
-    color: $gray;
+    color: var(--text-tertiary);
 
     .post-author-image {
       width: 32px;
       height: 32px;
       border-radius: 50%;
       object-fit: cover;
-      border: 2px solid #e9ecef;
+      border: 2px solid var(--border-primary);
     }
 
     .post-author {
       font-weight: 500;
-      color: #495057;
+      color: var(--text-secondary);
     }
 
     .meta-separator {
-      color: #dee2e6;
+      color: var(--text-muted);
     }
 
     .post-date {
-      color: $gray;
+      color: var(--text-tertiary);
     }
   }
 
@@ -631,7 +734,7 @@ nav.main-nav {
     margin: 0 0 20px 0;
     font-size: 15px;
     line-height: 1.6;
-    color: #4a5568;
+    color: var(--text-secondary);
     display: -webkit-box;
     -webkit-line-clamp: 2;
     line-clamp: 2;
@@ -748,7 +851,7 @@ nav.main-nav {
     font-weight: 700;
     line-height: 1.2;
     margin-bottom: 16px;
-    color: $darkerGray;
+    color: var(--text-primary);
   }
 
   .author-meta {
@@ -796,7 +899,7 @@ nav.main-nav {
     min-width: 0;
     font-size: 17px;
     line-height: 1.65;
-    color: $darkGray;
+    color: var(--text-secondary);
     text-align: justify;
 
     h2 {
@@ -829,8 +932,8 @@ nav.main-nav {
     }
 
     code {
-      background: #f6f8fa;
-      color: #d73a49;
+      background: var(--code-bg);
+      color: var(--code-color);
       padding: 2px 6px;
       border-radius: 3px;
       font-size: 15px;
@@ -849,12 +952,12 @@ nav.main-nav {
 .table-of-contents {
   position: sticky;
   top: 20px;
-  background: #f8f9fa;
+  background: var(--bg-secondary);
   border-radius: 8px;
   padding: 0;
   overflow: hidden;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-  border: 1px solid #e9ecef;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-primary);
 
   @include mobile {
     position: static;
@@ -917,7 +1020,7 @@ nav.main-nav {
     max-height: calc(100vh - 200px);
     overflow-y: auto;
     padding: 16px 12px;
-    background: #ffffff;
+    background: var(--card-bg);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
     &::-webkit-scrollbar {
@@ -925,15 +1028,15 @@ nav.main-nav {
     }
 
     &::-webkit-scrollbar-track {
-      background: transparent;
+      background: var(--scrollbar-track);
     }
 
     &::-webkit-scrollbar-thumb {
-      background: #cbd5e0;
+      background: var(--scrollbar-thumb);
       border-radius: 2px;
 
       &:hover {
-        background: #a0aec0;
+        background: var(--scrollbar-thumb-hover);
       }
     }
   }
@@ -960,7 +1063,7 @@ nav.main-nav {
     .toc-link {
       display: block;
       padding: 8px 12px;
-      color: #4a5568;
+      color: var(--text-secondary);
       text-decoration: none;
       font-size: 13px;
       font-weight: 500;
@@ -1031,7 +1134,7 @@ nav.main-nav {
     align-items: center;
     gap: 8px;
     padding: 10px 20px;
-    background: $white;
+    background: var(--card-bg);
     color: #667eea;
     border: 2px solid #667eea;
     border-radius: 6px;
@@ -1055,12 +1158,12 @@ nav.main-nav {
     &.disabled {
       opacity: 0.4;
       cursor: not-allowed;
-      border-color: $gray;
-      color: $gray;
+      border-color: var(--border-secondary);
+      color: var(--text-tertiary);
 
       &:hover {
-        background: $white;
-        color: $gray;
+        background: var(--card-bg);
+        color: var(--text-tertiary);
         transform: none;
         box-shadow: none;
       }
@@ -1079,9 +1182,9 @@ nav.main-nav {
     justify-content: center;
     width: 40px;
     height: 40px;
-    background: $white;
-    color: $darkGray;
-    border: 1px solid #dee2e6;
+    background: var(--card-bg);
+    color: var(--text-secondary);
+    border: 1px solid var(--border-secondary);
     border-radius: 6px;
     font-weight: 500;
     font-size: 14px;
@@ -1089,7 +1192,7 @@ nav.main-nav {
     transition: all 0.2s ease;
 
     &:hover {
-      background: #f8f9fa;
+      background: var(--bg-secondary);
       border-color: #667eea;
       color: #667eea;
     }
@@ -1105,7 +1208,7 @@ nav.main-nav {
 
   .pagination-ellipsis {
     padding: 0 4px;
-    color: $gray;
+    color: var(--text-tertiary);
     font-weight: 600;
   }
 
@@ -1131,7 +1234,7 @@ nav.main-nav {
 
   p {
     font-size: 14px;
-    color: $gray;
+    color: var(--text-tertiary);
     margin: 0;
   }
 }
@@ -1260,12 +1363,12 @@ footer {
   }
 
   .tag-badge {
-    background: #f1f3f5;
-    color: #495057;
-    border: 1px solid #dee2e6;
+    background: var(--bg-secondary);
+    color: var(--text-secondary);
+    border: 1px solid var(--border-secondary);
 
     &:hover {
-      background: #e9ecef;
+      background: var(--bg-tertiary);
       border-color: #667eea;
       color: #667eea;
       transform: translateY(-2px);
@@ -1378,12 +1481,12 @@ footer {
   }
 
   .category-card {
-    background: $white;
+    background: var(--card-bg);
     border-radius: 16px;
     padding: 32px 24px;
     cursor: pointer;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    border: 2px solid #e9ecef;
+    border: 2px solid var(--border-primary);
     position: relative;
     overflow: hidden;
 
@@ -1427,7 +1530,7 @@ footer {
       width: 80px;
       height: 80px;
       margin: 0 auto 20px;
-      background: #f8f9fa;
+      background: var(--bg-secondary);
       border-radius: 16px;
       display: flex;
       align-items: center;
@@ -1442,21 +1545,21 @@ footer {
     .category-name {
       font-size: 22px;
       font-weight: 700;
-      color: $darkerGray;
+      color: var(--text-primary);
       margin: 0 0 8px 0;
     }
 
     .category-description {
       font-size: 14px;
-      color: $gray;
+      color: var(--text-tertiary);
       margin: 0 0 16px 0;
     }
 
     .category-badge-count {
       display: inline-block;
       padding: 6px 16px;
-      background: #f8f9fa;
-      color: #495057;
+      background: var(--bg-secondary);
+      color: var(--text-secondary);
       font-size: 14px;
       font-weight: 600;
       border-radius: 20px;
@@ -1493,7 +1596,7 @@ footer {
 
     .category-modal-content {
       position: relative;
-      background: $white;
+      background: var(--card-bg);
       border-radius: 16px;
       max-width: 800px;
       width: 100%;
@@ -1604,7 +1707,7 @@ footer {
       gap: 20px;
       padding: 20px;
       margin-bottom: 16px;
-      background: #f8f9fa;
+      background: var(--bg-secondary);
       border-radius: 12px;
       cursor: pointer;
       transition: all 0.2s ease;
@@ -1615,7 +1718,7 @@ footer {
       }
 
       &:hover {
-        background: $white;
+        background: var(--card-bg);
         border-color: #667eea;
         transform: translateX(4px);
         box-shadow: 0 4px 12px rgba(102, 126, 234, 0.1);
@@ -1633,7 +1736,7 @@ footer {
           margin: 0 0 8px 0;
           font-size: 18px;
           font-weight: 600;
-          color: $darkerGray;
+          color: var(--text-primary);
 
           a {
             color: inherit;
@@ -1654,7 +1757,7 @@ footer {
 
           .post-date {
             font-size: 13px;
-            color: $gray;
+            color: var(--text-tertiary);
           }
 
           .post-tags-preview {
@@ -1664,10 +1767,10 @@ footer {
             .mini-tag {
               font-size: 11px;
               padding: 2px 8px;
-              background: $white;
-              color: #495057;
+              background: var(--card-bg);
+              color: var(--text-secondary);
               border-radius: 10px;
-              border: 1px solid #dee2e6;
+              border: 1px solid var(--border-secondary);
             }
           }
         }
@@ -1675,7 +1778,7 @@ footer {
         .category-post-excerpt {
           font-size: 14px;
           line-height: 1.5;
-          color: #4a5568;
+          color: var(--text-secondary);
           margin: 0;
           display: -webkit-box;
           -webkit-line-clamp: 2;
@@ -1687,7 +1790,7 @@ footer {
 
       .category-post-arrow {
         flex-shrink: 0;
-        color: $gray;
+        color: var(--text-tertiary);
         transition: all 0.2s ease;
 
         @include mobile {
@@ -1725,16 +1828,16 @@ footer {
     gap: 10px;
     margin-bottom: 50px;
     padding: 24px;
-    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
     border-radius: 8px;
-    border: 1px solid #e9ecef;
+    border: 1px solid var(--border-primary);
 
     .tag-cloud-item {
       display: inline-block;
       padding: 8px 16px;
-      background: $white;
-      color: #495057;
-      border: 1px solid #dee2e6;
+      background: var(--card-bg);
+      color: var(--text-secondary);
+      border: 1px solid var(--border-secondary);
       border-radius: 20px;
       text-decoration: none;
       font-size: 14px;
@@ -1743,7 +1846,7 @@ footer {
 
       .tag-count {
         font-size: 12px;
-        color: $gray;
+        color: var(--text-tertiary);
         margin-left: 4px;
       }
 
@@ -1781,8 +1884,8 @@ footer {
         font-size: 28px;
         margin: 0;
         padding-bottom: 12px;
-        border-bottom: 2px solid #dee2e6;
-        color: $darkerGray;
+        border-bottom: 2px solid var(--border-secondary);
+        color: var(--text-primary);
         flex: 1;
 
         .tag-icon {
@@ -1793,7 +1896,7 @@ footer {
           font-size: 14px;
           font-weight: 500;
           color: $white;
-          background: #495057;
+          background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
           padding: 4px 10px;
           border-radius: 12px;
           margin-left: auto;
@@ -1835,20 +1938,20 @@ footer {
 
         li {
           padding: 12px 0;
-          border-bottom: 1px solid #e9ecef;
+          border-bottom: 1px solid var(--border-primary);
           display: flex;
           justify-content: space-between;
           align-items: center;
           transition: background 0.2s ease;
 
           &:hover {
-            background: #f8f9fa;
+            background: var(--bg-secondary);
             padding-left: 8px;
           }
 
           a {
             flex: 1;
-            color: $darkGray;
+            color: var(--text-secondary);
             font-weight: 500;
             font-size: 16px;
             text-decoration: none;
@@ -1860,7 +1963,7 @@ footer {
 
           .post-date {
             font-size: 14px;
-            color: $gray;
+            color: var(--text-tertiary);
             white-space: nowrap;
             margin-left: 16px;
           }
@@ -1952,9 +2055,9 @@ footer {
 .post-footer-taxonomy {
   margin-bottom: 40px;
   padding: 24px;
-  background: #f8f9fa;
+  background: var(--bg-secondary);
   border-radius: 12px;
-  border: 1px solid #e9ecef;
+  border: 1px solid var(--border-primary);
 
   .taxonomy-section {
     margin-bottom: 20px;
@@ -1969,7 +2072,7 @@ footer {
       gap: 10px;
       font-size: 16px;
       font-weight: 600;
-      color: $darkerGray;
+      color: var(--text-primary);
       margin: 0 0 12px 0;
       text-transform: uppercase;
       letter-spacing: 0.5px;
@@ -1994,11 +2097,11 @@ footer {
       border-radius: 8px;
       text-decoration: none;
       transition: all 0.2s ease;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+      box-shadow: var(--shadow-sm);
 
       &:hover {
         transform: translateY(-2px);
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        box-shadow: var(--shadow-md);
       }
     }
 
@@ -2013,14 +2116,14 @@ footer {
     }
 
     .tag-badge-footer {
-      background: $white;
-      color: #495057;
-      border: 2px solid #dee2e6;
+      background: var(--card-bg);
+      color: var(--text-secondary);
+      border: 2px solid var(--border-secondary);
 
       &:hover {
         border-color: #667eea;
         color: #667eea;
-        background: #f8f9fa;
+        background: var(--bg-tertiary);
       }
     }
   }
@@ -2043,12 +2146,12 @@ footer {
 .related-posts {
   margin-top: 60px;
   padding-top: 40px;
-  border-top: 2px solid #e9ecef;
+  border-top: 2px solid var(--border-primary);
 
   h3 {
     font-size: 28px;
     font-weight: 700;
-    color: $darkerGray;
+    color: var(--text-primary);
     margin-bottom: 30px;
     display: flex;
     align-items: center;
@@ -2072,17 +2175,17 @@ footer {
   }
 
   .related-post-card {
-    background: $white;
-    border: 1px solid #e9ecef;
+    background: var(--card-bg);
+    border: 1px solid var(--border-primary);
     border-radius: 12px;
     padding: 24px;
     cursor: pointer;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    box-shadow: var(--shadow-sm);
 
     &:hover {
       transform: translateY(-4px);
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+      box-shadow: var(--card-hover-shadow);
       border-color: #667eea;
     }
 
@@ -2093,7 +2196,7 @@ footer {
       line-height: 1.4;
 
       a {
-        color: $darkerGray;
+        color: var(--text-primary);
         text-decoration: none;
         transition: color 0.2s ease;
 
@@ -2106,7 +2209,7 @@ footer {
     .related-post-meta {
       margin-bottom: 12px;
       font-size: 13px;
-      color: $gray;
+      color: var(--text-tertiary);
 
       .post-date {
         display: inline-flex;
@@ -2123,7 +2226,7 @@ footer {
     .related-post-excerpt {
       font-size: 14px;
       line-height: 1.6;
-      color: #4a5568;
+      color: var(--text-secondary);
       margin: 0;
       display: -webkit-box;
       -webkit-line-clamp: 3;
@@ -2204,7 +2307,7 @@ footer {
 
   .about-tagline {
     font-size: 18px;
-    color: $gray;
+    color: var(--text-tertiary);
     margin: 0 0 24px 0;
 
     @include mobile {
@@ -2223,17 +2326,19 @@ footer {
       display: flex;
       align-items: center;
       justify-content: center;
-      background: $white;
+      background: var(--card-bg);
       border-radius: 50%;
       color: #667eea;
       transition: all 0.3s ease;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      box-shadow: var(--shadow-sm);
+      border: 2px solid var(--border-primary);
 
       &:hover {
         transform: translateY(-4px);
         box-shadow: 0 8px 20px rgba(102, 126, 234, 0.2);
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         color: $white;
+        border-color: #667eea;
       }
     }
   }
@@ -2255,7 +2360,7 @@ footer {
       p {
         font-size: 18px;
         line-height: 1.7;
-        color: #4a5568;
+        color: var(--text-secondary);
 
         @include mobile {
           font-size: 16px;
@@ -2278,9 +2383,9 @@ footer {
 
   .feature-card {
     padding: 32px;
-    background: $white;
+    background: var(--card-bg);
     border-radius: 16px;
-    border: 2px solid #e9ecef;
+    border: 2px solid var(--border-primary);
     transition: all 0.3s ease;
 
     &:hover {
@@ -2300,7 +2405,7 @@ footer {
     .feature-icon {
       width: 64px;
       height: 64px;
-      background: #f8f9fa;
+      background: var(--bg-secondary);
       border-radius: 12px;
       display: flex;
       align-items: center;
@@ -2323,7 +2428,7 @@ footer {
     p {
       font-size: 15px;
       line-height: 1.6;
-      color: #4a5568;
+      color: var(--text-secondary);
       margin: 0;
     }
   }
@@ -2353,7 +2458,7 @@ footer {
       p {
         font-size: 16px;
         line-height: 1.7;
-        color: #4a5568;
+        color: var(--text-secondary);
         margin-bottom: 16px;
       }
     }
@@ -2382,9 +2487,9 @@ footer {
 
     .skill-tag {
       padding: 10px 20px;
-      background: $white;
-      color: #495057;
-      border: 2px solid #dee2e6;
+      background: var(--card-bg);
+      color: var(--text-secondary);
+      border: 2px solid var(--border-secondary);
       border-radius: 24px;
       font-size: 14px;
       font-weight: 500;
