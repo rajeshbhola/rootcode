@@ -8,6 +8,16 @@ excerpt: Learn professional Git workflows, branching strategies, and GitHub best
 
 Git and GitHub are essential tools for modern software development. This comprehensive guide will help you master Git workflows and collaborate effectively with your team.
 
+```plantuml
+@startuml
+Alice -> Bob: Authentication Request
+Bob --> Alice: Authentication Response
+
+Alice -> Bob: Another authentication Request
+Alice <-- Bob: Another authentication Response
+@enduml
+```
+
 ## Understanding Git Fundamentals
 
 Git is a distributed version control system that tracks changes in your codebase. Every developer has a complete copy of the repository, enabling offline work and powerful collaboration.
