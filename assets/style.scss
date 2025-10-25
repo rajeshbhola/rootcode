@@ -705,14 +705,6 @@ nav.main-nav {
     margin-bottom: 16px;
     font-size: 14px;
     color: var(--text-tertiary);
-    flex-wrap: nowrap;
-    white-space: nowrap;
-
-    @include mobile {
-      gap: 6px;
-      font-size: 12px;
-      padding: 0 20px;
-    }
 
     .post-author-image {
       width: 32px;
@@ -720,41 +712,19 @@ nav.main-nav {
       border-radius: 50%;
       object-fit: cover;
       border: 2px solid var(--border-primary);
-      flex-shrink: 0;
-
-      @include mobile {
-        width: 28px;
-        height: 28px;
-      }
     }
 
     .post-author {
       font-weight: 500;
       color: var(--text-secondary);
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      flex-shrink: 1;
-      min-width: 0;
-
-      @include mobile {
-        max-width: 100px;
-      }
     }
 
     .meta-separator {
       color: var(--text-muted);
-      flex-shrink: 0;
     }
 
     .post-date {
       color: var(--text-tertiary);
-      white-space: nowrap;
-      flex-shrink: 0;
-
-      @include mobile {
-        font-size: 11px;
-      }
     }
   }
 

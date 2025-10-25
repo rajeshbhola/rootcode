@@ -53,7 +53,7 @@ permalink: /categories/
                 <div class="category-post-content">
                   <h4><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></h4>
                   <div class="category-post-meta">
-                    <span class="post-date">{{ post.date | date: "%B %d, %Y" }}</span>
+                    <span class="post-date">{{ post.date | date: "%B %d" }}</span>
                     {% if post.tags.size > 0 %}
                       <span class="post-tags-preview">
                         {% for tag in post.tags limit:2 %}
