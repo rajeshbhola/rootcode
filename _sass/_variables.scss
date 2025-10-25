@@ -98,8 +98,8 @@ $white: #fff;
   --selection-text: #ffffff;
 }
 
-// Font stacks - Modern, coding-friendly fonts
-$sansSerif: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif;
+// Font stacks - Modern, Inter-based fonts
+$sansSerif: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif;
 $monospace: "Fira Code", "JetBrains Mono", "SF Mono", "Cascadia Code", "Consolas", "Monaco", "Courier New", monospace;
 $headingFont: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", sans-serif;
 
