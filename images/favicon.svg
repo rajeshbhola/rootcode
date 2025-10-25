@@ -1,0 +1,35 @@
+<svg width="32" height="32" viewBox="0 0 70 70" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background with gradient -->
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="textGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#f0f0f0;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Rounded square background -->
+  <rect width="70" height="70" rx="12" fill="url(#bgGradient)"/>
+
+  <!-- R Letter -->
+  <path d="M 18 20 L 18 50 M 18 20 L 28 20 Q 33 20 33 25 Q 33 30 28 30 L 18 30 M 28 30 L 33 50"
+        stroke="url(#textGradient)"
+        stroke-width="3.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        fill="none"/>
+
+  <!-- C Letter -->
+  <path d="M 52 25 Q 47 20 40 20 Q 37 20 37 25 L 37 45 Q 37 50 40 50 Q 47 50 52 45"
+        stroke="url(#textGradient)"
+        stroke-width="3.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        fill="none"/>
+
+  <!-- Subtle inner glow effect -->
+  <rect width="70" height="70" rx="12" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+</svg>

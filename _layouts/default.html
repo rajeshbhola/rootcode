@@ -5,17 +5,70 @@
     {% seo %}
     {% include meta.html %}
 
-    <!-- Google Fonts - Modern, coding-friendly fonts -->
+    <!-- Preconnect to external domains for performance -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+
+    <!-- Google Fonts - Modern, coding-friendly fonts with display=swap for better performance -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript>
+      <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    </noscript>
 
     <link rel="stylesheet" type="text/css" href="{{ site.baseurl }}/assets/style.css" />
     <link rel="alternate" type="application/rss+xml" title="{{ site.name }} - {{ site.description }}" href="{{ site.baseurl }}/feed.xml" />
     <link rel="canonical" href="{{ site.url }}{{ page.url }}" />
 
-    <meta name="theme-color" content="#000000">
+    <!-- Favicon and App Icons -->
+    <link rel="icon" type="image/svg+xml" href="{{ site.baseurl }}/images/favicon.svg">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ site.baseurl }}/images/favicon-16x16.png">
     <link rel="icon" type="image/png" sizes="32x32" href="{{ site.baseurl }}/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="{{ site.baseurl }}/images/favicon-48x48.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ site.baseurl }}/images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="{{ site.baseurl }}/images/apple-touch-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="167x167" href="{{ site.baseurl }}/images/apple-touch-icon-167x167.png">
+    <link rel="manifest" href="{{ site.baseurl }}/site.webmanifest">
+    <meta name="theme-color" content="#000000">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "{% if page.layout == 'post' %}BlogPosting{% else %}WebSite{% endif %}",
+      "headline": "{% if page.title %}{{ page.title }}{% else %}{{ site.name }} – {{ site.description }}{% endif %}",
+      "name": "{% if page.title %}{{ page.title }}{% else %}{{ site.name }}{% endif %}",
+      "description": "{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}",
+      "url": "{{ site.url }}{{ page.url }}",
+      {% if page.layout == 'post' %}
+      "datePublished": "{{ page.date | date_to_xmlschema }}",
+      {% if page.modified %}
+      "dateModified": "{{ page.modified | date_to_xmlschema }}",
+      {% endif %}
+      "author": {
+        "@type": "Person",
+        "name": "{{ site.author }}",
+        "url": "{{ site.url }}{{ site.baseurl }}/about"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "{{ site.name }}",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "{{ site.url }}{{ site.baseurl }}/images/logo.svg"
+        }
+      },
+      {% endif %}
+      "image": "{% if page.image %}{{ site.url }}{{ page.image }}{% else %}{{ site.url }}{{ site.baseurl }}/images/logo.svg{% endif %}",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "{{ site.url }}{{ page.url }}"
+      }
+    }
+    </script>
 
     <!-- Prevent flash of white background - Apply dark theme immediately -->
     <script>
@@ -117,25 +170,17 @@
     <!-- Theme Toggle Script (load first to prevent flash) -->
     <script src="{{ site.baseurl }}/assets/js/theme-toggle.js"></script>
 
-    <!-- Copy Code Button Script -->
-    <script src="{{ site.baseurl }}/assets/js/copy-code.js"></script>
+    <!-- Deferred Scripts for Better Performance -->
+    <script src="{{ site.baseurl }}/assets/js/copy-code.js" defer></script>
+    <script src="{{ site.baseurl }}/assets/js/scroll-to-top.js" defer></script>
+    <script src="{{ site.baseurl }}/assets/js/table-of-contents.js" defer></script>
+    <script src="{{ site.baseurl }}/assets/js/mobile-menu.js" defer></script>
+    <script src="{{ site.baseurl }}/assets/js/reading-progress.js" defer></script>
 
-    <!-- Scroll to Top Button Script -->
-    <script src="{{ site.baseurl }}/assets/js/scroll-to-top.js"></script>
-
-    <!-- Table of Contents Script -->
-    <script src="{{ site.baseurl }}/assets/js/table-of-contents.js"></script>
-
-    <!-- Mobile Menu Script -->
-    <script src="{{ site.baseurl }}/assets/js/mobile-menu.js"></script>
-
-    <!-- Reading Progress Bar Script -->
-    <script src="{{ site.baseurl }}/assets/js/reading-progress.js"></script>
-
-    <!-- Pako (deflate compression) for PlantUML -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pako/2.1.0/pako.min.js" integrity="sha512-g2TeAWw5GPnX7z0Kn8nFbYfeHcvAu/tx6d6mrLe/90mkCxO+RcptyYpksUz35EO337F83bZwcmUyHiHamspkfg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- Pako (deflate compression) for PlantUML - Async loading -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pako/2.1.0/pako.min.js" integrity="sha512-g2TeAWw5GPnX7z0Kn8nFbYfeHcvAu/tx6d6mrLe/90mkCxO+RcptyYpksUz35EO337F83bZwcmUyHiHamspkfg==" crossorigin="anonymous" referrerpolicy="no-referrer" defer></script>
 
     <!-- PlantUML Diagram Renderer Script -->
-    <script src="{{ site.baseurl }}/assets/js/plantuml.js"></script>
+    <script src="{{ site.baseurl }}/assets/js/plantuml.js" defer></script>
   </body>
 </html>

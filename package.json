@@ -1,0 +1,13 @@
+{
+  "name": "rootcode",
+  "version": "1.0.0",
+  "description": "RootCode Jekyll Blog by Rajesh Bhola",
+  "scripts": {
+    "generate:favicons": "node generate_favicons.js",
+    "build": "bundle exec jekyll build",
+    "serve": "bundle exec jekyll serve"
+  },
+  "devDependencies": {
+    "sharp": "^0.34.4"
+  }
+}

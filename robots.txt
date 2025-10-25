@@ -1,0 +1,11 @@
+# Allow all search engines to crawl the site
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://rajeshbhola.github.io/rootcode/sitemap.xml
+
+# Disallow crawling of certain paths (if any)
+Disallow: /assets/js/
+Disallow: /assets/css/
+Disallow: /_site/

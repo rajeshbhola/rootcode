@@ -44,6 +44,10 @@ disqus:
 # Enter your Google Analytics web tracking code (e.g. UA-2110908-2) to activate tracking
 google_analytics:
 
+# SEO Settings
+lang: en_US
+locale: en_US
+
 # Your website URL (e.g. http://amitmerchant1990.github.io or http://www.amitmerchant.com)
 # Used for Sitemap.xml and your RSS feed
 url: https://rajeshbhola.github.io/rootcode
@@ -76,7 +80,7 @@ kramdown:
 
 # Set the Sass partials directory, as we're using @imports
 sass:
-  style: :expanded # You might prefer to minify using :compressed
+  style: :compressed # Minified for production performance
 
 # Use the following plug-ins
 plugins:
@@ -98,4 +102,12 @@ exclude:
   - README.md
   - CNAME
   - vendor
+  - node_modules
+  - package.json
+  - package-lock.json
+  - generate_favicons.py
+  - generate_favicons.js
+  - FAVICON_GENERATION.md
+  - SEO_PERFORMANCE_GUIDE.md
+  - SEO_IMPLEMENTATION_SUMMARY.md
 
