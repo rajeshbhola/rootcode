@@ -38,8 +38,8 @@ html.theme-transition *:after {
 
 .container {
   margin: 0 auto;
-  max-width: 840px;
-  padding: 0 10px;
+  max-width: 940px;
+  padding: 0 8px;
   width: 100%;
 }
 
@@ -178,22 +178,26 @@ img {
   padding: 20px 0;
   border-bottom: none;
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 
   @include mobile {
-    text-align: center;
+    padding: 15px 0 15px 50px;
+    justify-content: flex-start;
   }
 }
 
 .site-avatar {
-  float: left;
   width: 70px;
   height: 70px;
   margin-right: 15px;
+  flex-shrink: 0;
 
   @include mobile {
-    float: none;
-    display: block;
-    margin: 0 auto;
+    width: 50px;
+    height: 50px;
+    margin-right: 12px;
   }
 
   img {
@@ -202,12 +206,11 @@ img {
 }
 
 .site-info {
-  float: left;
+  flex-shrink: 0;
 
   @include mobile {
-    float: none;
-    display: block;
-    margin: 0 auto;
+    flex: 1;
+    text-align: left;
   }
 }
 
@@ -219,6 +222,10 @@ img {
   font-weight: 700;
   font-size: 28px;
   letter-spacing: -0.02em;
+
+  @include mobile {
+    font-size: 20px;
+  }
 
   a {
     color: $white;
@@ -235,6 +242,8 @@ img {
   font-size: 16px;
 
   @include mobile {
+    font-size: 13px;
+    margin: 0;
     margin: 3px 0;
   }
 }
@@ -295,24 +304,24 @@ img {
 
 // Theme Toggle Button - Desktop (positioned on right with nav)
 .theme-toggle-desktop {
-  float: right;
   display: flex;
   align-items: center;
   justify-content: center;
   width: 40px;
   height: 40px;
-  background: rgba(255, 255, 255, 0.15);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  border-radius: 50%;
+  background: transparent;
+  border: none;
   cursor: pointer;
   transition: all 0.3s ease;
-  padding: 0;
-  margin-top: 23px;
-  margin-right: 16px;
+  padding: 8px;
+  margin: 0;
+  border-radius: 6px;
 
   svg {
     color: $white;
     transition: all 0.3s ease;
+    width: 22px;
+    height: 22px;
   }
 
   .sun-icon {
@@ -324,9 +333,7 @@ img {
   }
 
   &:hover {
-    background: rgba(255, 255, 255, 0.25);
-    border-color: rgba(255, 255, 255, 0.5);
-    transform: scale(1.1);
+    background: rgba(255, 255, 255, 0.1);
   }
 
   &:active {
@@ -412,13 +419,11 @@ img {
 }
 
 nav.main-nav {
-  float: right;
-  margin-top: 23px;
   font-family: $sansSerif;
-  font-size: 16px;
+  font-size: 15px;
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 4px;
   flex-wrap: nowrap;
 
   @include mobile {
@@ -437,84 +442,92 @@ nav.main-nav {
     flex-direction: column;
     align-items: flex-start;
     gap: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
 
     &.active {
       right: 0;
     }
   }
 
-  a {
-    margin-left: 0;
+  .nav-link {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 12px;
+    margin: 0;
     color: $white;
-    text-align: right;
     font-weight: 500;
     letter-spacing: 0.02em;
     transition: all 0.2s ease;
+    border-radius: 6px;
+
+    svg {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+      stroke: currentColor;
+    }
+
+    span {
+      white-space: nowrap;
+    }
 
     &:hover {
-      color: rgba(255, 255, 255, 0.8);
-      transform: translateY(-1px);
+      color: rgba(255, 255, 255, 0.9);
+      background: rgba(255, 255, 255, 0.1);
     }
 
     @include mobile {
-      margin: 0 0 24px 0;
-      font-size: 18px;
+      margin: 0 0 20px 0;
+      padding: 14px 16px;
+      font-size: 17px;
       color: var(--text-secondary);
       width: 100%;
       text-align: left;
-      padding: 12px 0;
       border-bottom: 1px solid var(--border-primary);
+      gap: 12px;
+
+      svg {
+        width: 20px;
+        height: 20px;
+      }
 
       &:hover {
         color: #667eea;
-        padding-left: 8px;
+        background: var(--bg-secondary);
+        padding-left: 20px;
+        border-bottom-color: #667eea;
+
+        svg {
+          transform: scale(1.1);
+        }
       }
     }
   }
 
-  .search-icon-link {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 40px;
-    height: 40px;
-    background: transparent;
-    border: none;
-    border-radius: 50%;
-    transition: all 0.3s ease;
+  .nav-link.search-icon-link {
+    margin-right: 16px;
+
+    span {
+      display: none;
+    }
+
+    svg {
+      width: 20px;
+      height: 20px;
+    }
 
     &:hover {
-      transform: scale(1.1);
-    }
-
-    &:active {
-      transform: scale(0.95);
-    }
-
-    .search-icon {
-      color: $white;
-      transition: color 0.3s ease;
+      background: rgba(255, 255, 255, 0.15);
     }
 
     @include mobile {
-      background: var(--bg-secondary);
-      border-color: var(--border-secondary);
-      width: 100%;
-      height: 48px;
-      border-radius: 8px;
-      margin-bottom: 24px;
+      margin-right: 0;
+      margin-bottom: 20px;
 
-      .search-icon {
-        color: var(--text-secondary);
-      }
-
-      &:hover {
-        background: var(--bg-tertiary);
-        border-color: #667eea;
-
-        .search-icon {
-          color: #667eea;
-        }
+      span {
+        display: inline;
       }
     }
   }
