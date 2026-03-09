@@ -1,0 +1,42 @@
+{% comment %}
+  AdSense Ad Block Component
+
+  Usage: {% include adsense.html slot="header" %}
+
+  Available slots:
+  - header: Top of page ad (horizontal banner)
+  - sidebar: Sidebar ad (vertical rectangle)
+  - in-article: In-article ad (responsive)
+  - footer: Footer ad (horizontal banner)
+  - between-posts: Between blog post cards
+
+  To enable AdSense:
+  1. Set google_adsense_id in _config.yml
+  2. Set google_adsense_enabled: true in _config.yml
+  3. Add slot IDs for each placement in _config.yml
+{% endcomment %}
+
+{% if site.google_adsense_enabled and site.google_adsense_id %}
+<div class="adsense-container adsense-{{ include.slot | default: 'default' }}" data-ad-slot="{{ include.slot }}">
+  <!-- Google AdSense Ad -->
+  <ins class="adsbygoogle"
+       style="display:block"
+       data-ad-client="{{ site.google_adsense_id }}"
+       {% if site.adsense_slots[include.slot] %}
+       data-ad-slot="{{ site.adsense_slots[include.slot] }}"
+       {% endif %}
+       {% if include.slot == 'in-article' %}
+       data-ad-format="fluid"
+       data-ad-layout-key="-fb+5w+4e-db+86"
+       {% elsif include.slot == 'between-posts' or include.slot == 'header' or include.slot == 'footer' %}
+       data-ad-format="auto"
+       data-full-width-responsive="true"
+       {% else %}
+       data-ad-format="auto"
+       data-full-width-responsive="true"
+       {% endif %}></ins>
+  <script>
+    (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+</div>
+{% endif %}

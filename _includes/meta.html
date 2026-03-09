@@ -1,35 +1,16 @@
 <meta charset="utf-8" />
 <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0'>
 
-<!-- SEO Meta Tags -->
-{% if page.excerpt %}
-<meta name="description" content="{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}" />
-{% else %}
-<meta name="description" content="{{ site.description }}">
-{% endif %}
+<!-- Additional SEO Meta Tags (supplements jekyll-seo-tag) -->
 <meta name="author" content="{{ site.author | default: site.name }}" />
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
 
-<!-- OpenGraph Meta Tags -->
-<meta property="og:locale" content="en_US" />
-<meta property="og:type" content="{% if page.layout == 'post' %}article{% else %}website{% endif %}" />
-<meta property="og:site_name" content="{{ site.name }}" />
-<meta property="og:url" content="{{ site.url }}{{ page.url }}" />
-{% if page.title %}
-<meta property="og:title" content="{{ page.title }}" />
-{% else %}
-<meta property="og:title" content="{{ site.name }} – {{ site.description }}" />
-{% endif %}
-{% if page.excerpt %}
-<meta property="og:description" content="{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}" />
-{% else %}
-<meta property="og:description" content="{{ site.description }}" />
-{% endif %}
+<!-- OpenGraph Image -->
 {% if page.image %}
-<meta property="og:image" content="{{ site.url }}{{ page.image }}" />
-<meta property="og:image:secure_url" content="{{ site.url }}{{ page.image }}" />
+<meta property="og:image" content="{{ site.url }}{{ site.baseurl }}{{ page.image }}" />
+<meta property="og:image:secure_url" content="{{ site.url }}{{ site.baseurl }}{{ page.image }}" />
 {% else %}
 <meta property="og:image" content="{{ site.url }}{{ site.baseurl }}/images/logo.svg" />
 {% endif %}
@@ -41,28 +22,18 @@
 <meta property="article:modified_time" content="{{ page.modified | date_to_xmlschema }}" />
 {% endif %}
 
-<!-- Twitter Card Meta Tags -->
-<meta name="twitter:card" content="summary_large_image" />
-{% if page.title %}
-<meta name="twitter:title" content="{{ page.title }}" />
-{% else %}
-<meta name="twitter:title" content="{{ site.name }} – {{ site.description }}" />
-{% endif %}
-{% if page.excerpt %}
-<meta name="twitter:description" content="{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}" />
-{% else %}
-<meta name="twitter:description" content="{{ site.description }}" />
-{% endif %}
+<!-- Twitter Card Image -->
 {% if page.image %}
-<meta name="twitter:image" content="{{ site.url }}{{ page.image }}" />
+<meta name="twitter:image" content="{{ site.url }}{{ site.baseurl }}{{ page.image }}" />
 {% else %}
 <meta name="twitter:image" content="{{ site.url }}{{ site.baseurl }}/images/logo.svg" />
 {% endif %}
+{% if site.footer-links.twitter %}
 <meta name="twitter:creator" content="@{{ site.footer-links.twitter }}" />
 <meta name="twitter:site" content="@{{ site.footer-links.twitter }}" />
+{% endif %}
 
-<!-- Additional SEO Tags -->
-<link rel="canonical" href="{{ site.url }}{{ page.url }}" />
+<!-- Pagination Links -->
 {% if paginator.previous_page %}
 <link rel="prev" href="{{ site.url }}{{ paginator.previous_page_path }}" />
 {% endif %}

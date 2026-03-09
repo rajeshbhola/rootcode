@@ -39,7 +39,7 @@ html.theme-transition *:after {
 .container {
   margin: 0 auto;
   max-width: 940px;
-  padding: 0 8px;
+  padding: 0 16px;
   width: 100%;
 }
 
@@ -64,11 +64,19 @@ h1 {
   a {
     color: inherit;
   }
+
+  @include mobile {
+    font-size: 26px;
+  }
 }
 
 h2 {
   font-size: 26px;
   font-weight: 600;
+
+  @include mobile {
+    font-size: 22px;
+  }
 }
 
 h3 {
@@ -131,6 +139,20 @@ img {
 // Fixes images in popup boxes from Google Translate
 .gmnoprint img {
   max-width: none;
+}
+
+// Responsive table wrapper
+table {
+  display: block;
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+// Prevent long words/URLs from breaking layout
+.entry, .post-content, article {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
 }
 
 .date {
@@ -201,7 +223,8 @@ img {
   }
 
   img {
-    border-radius: 5px;
+    border-radius: 14px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
   }
 }
 
@@ -253,15 +276,15 @@ img {
   display: none;
   flex-direction: column;
   justify-content: space-around;
-  width: 32px;
-  height: 32px;
+  width: 44px;
+  height: 44px;
   background: transparent;
   border: none;
   cursor: pointer;
-  padding: 0;
+  padding: 6px;
   z-index: 1001;
   position: absolute;
-  left: 10px;
+  left: 6px;
   top: 50%;
   transform: translateY(-50%);
 
@@ -430,7 +453,7 @@ nav.main-nav {
     position: fixed;
     top: 0;
     right: -100%;
-    width: 280px;
+    width: min(280px, 85vw);
     height: 100vh;
     background: var(--bg-primary);
     box-shadow: var(--shadow-md);
@@ -558,39 +581,7 @@ nav.main-nav {
 // .main
 //
 
-// Home Hero Section
-.home-hero {
-  text-align: center;
-  margin-bottom: 50px;
-  padding: 40px 20px;
-   
-  
-
-  h1 {
-    font-size: 42px;
-    font-weight: 700;
-    color: $darkerGray;
-    margin: 0 0 16px 0;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-
-    @include mobile {
-      font-size: 32px;
-    }
-  }
-
-  p {
-    font-size: 18px;
-    color: $gray;
-    margin: 0;
-
-    @include mobile {
-      font-size: 16px;
-    }
-  }
-}
+// Home Hero Section - base styles (enhanced version below overrides this)
 
 // View All Posts Button
 .view-all-posts {
@@ -662,7 +653,7 @@ nav.main-nav {
 // Modern Card Layout for Posts
 .posts {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(340px, 100%), 1fr));
   gap: 30px;
   margin-bottom: 40px;
 
@@ -767,7 +758,7 @@ nav.main-nav {
     padding: 0 24px;
     font-size: 15px;
     line-height: 1.6;
-    color: #4a5568;
+    color: var(--text-secondary);
     margin-bottom: 20px;
 
     p {
@@ -879,7 +870,7 @@ nav.main-nav {
     height: 48px;
     border-radius: 50%;
     object-fit: cover;
-    border: 2px solid #e9ecef;
+    border: 2px solid var(--border-primary);
   }
 
   .author-info {
@@ -919,7 +910,7 @@ nav.main-nav {
       margin-top: 2em;
       margin-bottom: 0.75em;
       padding-bottom: 0.3em;
-      border-bottom: 1px solid #eaecef;
+      border-bottom: 1px solid var(--border-primary);
       line-height: 1.3;
     }
 
@@ -1110,7 +1101,7 @@ nav.main-nav {
       .toc-link {
         font-size: 12px;
         padding: 6px 12px;
-        color: #718096;
+        color: var(--text-tertiary);
         font-weight: 400;
       }
     }
@@ -1228,15 +1219,16 @@ nav.main-nav {
   @include mobile {
     .pagination-numbers {
       .pagination-number {
-        width: 36px;
-        height: 36px;
-        font-size: 13px;
+        width: 44px;
+        height: 44px;
+        font-size: 14px;
       }
     }
 
     .pagination-btn {
-      padding: 8px 16px;
-      font-size: 13px;
+      padding: 10px 16px;
+      font-size: 14px;
+      min-height: 44px;
     }
   }
 }
@@ -1338,9 +1330,9 @@ footer {
 
   @include mobile {
     bottom: 20px;
-    right: 20px;
-    width: 45px;
-    height: 45px;
+    right: 16px;
+    width: 48px;
+    height: 48px;
     font-size: 20px;
   }
 }
@@ -1396,8 +1388,8 @@ footer {
   gap: 16px;
   margin-bottom: 20px;
   padding: 12px 0;
-  border-top: 1px solid #e9ecef;
-  border-bottom: 1px solid #e9ecef;
+  border-top: 1px solid var(--border-primary);
+  border-bottom: 1px solid var(--border-primary);
 
   .post-categories,
   .post-tags {
@@ -1437,12 +1429,12 @@ footer {
   }
 
   .tag-badge {
-    background: #f1f3f5;
-    color: #495057;
-    border: 1px solid #dee2e6;
+    background: var(--bg-secondary);
+    color: var(--text-secondary);
+    border: 1px solid var(--border-primary);
 
     &:hover {
-      background: #e9ecef;
+      background: var(--bg-tertiary);
       border-color: #667eea;
       color: #667eea;
     }
@@ -1743,15 +1735,15 @@ footer {
       }
 
       &::-webkit-scrollbar-track {
-        background: #f1f3f5;
+        background: var(--bg-secondary);
       }
 
       &::-webkit-scrollbar-thumb {
-        background: #cbd5e0;
+        background: var(--border-primary);
         border-radius: 4px;
 
         &:hover {
-          background: #a0aec0;
+          background: var(--text-tertiary);
         }
       }
     }
@@ -2085,11 +2077,11 @@ footer {
   .video-description {
     margin: 16px 0 0 0;
     padding: 16px;
-    background: $white;
+    background: var(--bg-secondary);
     border-radius: 8px;
     font-size: 15px;
     line-height: 1.6;
-    color: #4a5568;
+    color: var(--text-secondary);
     border-left: 4px solid #667eea;
   }
 
@@ -2103,7 +2095,7 @@ footer {
 .post-content-separator {
   margin: 40px 0 32px 0;
   border: none;
-  border-top: 2px solid #e9ecef;
+  border-top: 2px solid var(--border-primary);
 }
 
 // Post Footer Taxonomy (Categories and Tags at end of content)
@@ -2201,7 +2193,7 @@ footer {
 .related-posts {
   margin-top: 60px;
   padding-top: 40px;
-  border-top: 2px solid #e9ecef;
+  border-top: 2px solid var(--border-primary);
 
   h3 {
     font-size: 28px;
@@ -2322,7 +2314,7 @@ footer {
       height: 100%;
       border-radius: 50%;
       object-fit: cover;
-      border: 5px solid $white;
+      border: 5px solid var(--bg-primary);
       box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
     }
 
@@ -2337,7 +2329,7 @@ footer {
       display: flex;
       align-items: center;
       justify-content: center;
-      border: 4px solid $white;
+      border: 4px solid var(--bg-primary);
       box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
 
       svg {
@@ -2731,6 +2723,435 @@ footer {
 @keyframes spin {
   to {
     transform: rotate(360deg);
+  }
+}
+
+/**********************************************/
+/* MODERN REDESIGN - @rajeshbhola */
+/**********************************************/
+
+// Signature/Pen-style Text
+.signature-text {
+  font-family: 'Brush Script MT', 'Lucida Handwriting', 'Apple Chancery', cursive, $headingFont;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 600;
+  position: relative;
+  display: inline-block;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    opacity: 0.3;
+    border-radius: 2px;
+  }
+}
+
+// Enhanced Hero Section
+.home-hero {
+  text-align: center;
+  padding: 80px 20px 60px;
+  margin-bottom: 60px;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(102, 126, 234, 0.05) 0%, transparent 70%);
+    pointer-events: none;
+    animation: float 20s ease-in-out infinite;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .hero-badge {
+    display: inline-block;
+    padding: 8px 20px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 50px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-tertiary);
+    margin-bottom: 24px;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background: var(--bg-tertiary);
+      border-color: #667eea;
+      color: #667eea;
+      transform: translateY(-2px);
+    }
+  }
+
+  .hero-title {
+    font-size: 52px;
+    font-weight: 700;
+    line-height: 1.2;
+    margin: 0 0 24px;
+    color: var(--text-primary);
+    letter-spacing: -0.03em;
+
+    @include mobile {
+      font-size: 36px;
+    }
+  }
+
+  .hero-description {
+    font-size: 20px;
+    line-height: 1.6;
+    color: var(--text-secondary);
+    margin: 0 0 40px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+
+    @include mobile {
+      font-size: 18px;
+    }
+  }
+
+  .hero-stats {
+    display: flex;
+    justify-content: center;
+    gap: 48px;
+    flex-wrap: wrap;
+    margin-top: 48px;
+
+    @include mobile {
+      gap: 32px;
+    }
+  }
+
+  .stat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+
+    .stat-number {
+      font-size: 36px;
+      font-weight: 700;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 14px;
+      color: var(--text-tertiary);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  33% {
+    transform: translate(30px, -30px) rotate(120deg);
+  }
+  66% {
+    transform: translate(-20px, 20px) rotate(240deg);
+  }
+}
+
+// Section Header
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32px;
+
+  h2 {
+    margin: 0;
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--text-primary);
+  }
+
+  .section-link {
+    font-size: 16px;
+    font-weight: 600;
+    color: #667eea;
+    transition: all 0.3s ease;
+
+    &:hover {
+      color: #764ba2;
+      transform: translateX(4px);
+    }
+  }
+
+  @include mobile {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+}
+
+// Modern Posts Grid
+.posts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(340px, 100%), 1fr));
+  gap: 32px;
+  margin-bottom: 60px;
+
+  @include mobile {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+}
+
+// Modern Post Card
+.post-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 28px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+  }
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
+    border-color: rgba(102, 126, 234, 0.3);
+
+    &::before {
+      transform: scaleX(1);
+    }
+
+    .post-card-link svg {
+      transform: translateX(4px);
+    }
+  }
+
+  .post-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .post-category {
+    display: inline-flex;
+    align-items: center;
+    padding: 6px 14px;
+    background: rgba(102, 126, 234, 0.1);
+    color: #667eea;
+    border-radius: 50px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    transition: all 0.3s ease;
+  }
+
+  .reading-time {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    color: var(--text-tertiary);
+    font-weight: 500;
+
+    svg {
+      opacity: 0.7;
+    }
+  }
+
+  .post-card-title {
+    margin: 0 0 16px;
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 1.3;
+
+    a {
+      color: var(--text-primary);
+      transition: color 0.3s ease;
+
+      &:hover {
+        color: #667eea;
+      }
+    }
+  }
+
+  .post-card-excerpt {
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin: 0 0 24px;
+    font-size: 16px;
+  }
+
+  .post-card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 20px;
+    border-top: 1px solid var(--border-color);
+  }
+
+  .post-author-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .post-author-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--border-color);
+  }
+
+  .post-author-details {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .post-author-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+
+  .post-date {
+    font-size: 13px;
+    color: var(--text-tertiary);
+  }
+
+  .post-card-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--bg-secondary);
+    color: #667eea;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+
+    svg {
+      transition: transform 0.3s ease;
+    }
+
+    &:hover {
+      background: #667eea;
+      color: white;
+      transform: scale(1.1);
+    }
+  }
+}
+
+// Ad Card Styling (for between-posts ad)
+.ad-card {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 120px;
+}
+
+// AdSense Container Styles
+.adsense-container {
+  margin: 40px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100px;
+
+  &.adsense-header {
+    margin: 40px 0 60px;
+  }
+
+  &.adsense-footer {
+    margin: 60px 0 40px;
+  }
+
+  &.adsense-between-posts {
+    margin: 20px 0;
+  }
+
+  &.adsense-in-article {
+    margin: 32px 0;
+  }
+}
+
+// Update the site name in header for better styling
+.site-name {
+  a {
+    font-family: $headingFont;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: $white !important;
+    -webkit-text-fill-color: $white;
+  }
+}
+
+.site-description {
+  font-style: italic;
+  font-weight: 500;
+  opacity: 0.95;
+}
+
+// Improved container padding for better readability
+.container {
+  @media (max-width: 980px) {
+    padding: 0 24px;
+  }
+}
+
+// Enhanced link hover effects
+a {
+  transition: all 0.3s ease;
+}
+
+// Better spacing for main content
+#main {
+  padding: 40px 0 60px;
+
+  @include mobile {
+    padding: 24px 0 40px;
   }
 }
 

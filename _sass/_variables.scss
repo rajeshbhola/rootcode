@@ -29,6 +29,7 @@ $white: #fff;
 
   --border-primary: #e9ecef;
   --border-secondary: #dee2e6;
+  --border-color: #e9ecef;
   --border-hover: #667eea;
 
   --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
@@ -71,6 +72,7 @@ $white: #fff;
 
   --border-primary: #363636;
   --border-secondary: #404040;
+  --border-color: #363636;
   --border-hover: #667eea;
 
   --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
@@ -108,9 +110,15 @@ $helvetica: $sansSerif;
 $helveticaNeue: $sansSerif;
 $georgia: Georgia, serif;
 
-// Mobile breakpoints
+// Breakpoints
 @mixin mobile {
   @media screen and (max-width: 640px) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media screen and (min-width: 641px) and (max-width: 980px) {
     @content;
   }
 }

@@ -6,24 +6,40 @@ permalink: /posts/
 
 <div class="posts-page-header">
   <h1>All Posts</h1>
-  <p>Browse all articles from RootCode</p>
+  <p>Browse all articles from @rajeshbhola</p>
 </div>
 
-<div class="posts" id="posts-container">
+<div class="posts-grid" id="posts-container">
   {% for post in site.posts %}
-    <article class="post" data-post onclick="window.location='{{ site.baseurl }}{{ post.url }}'">
-      <h1><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></h1>
-
-      <div class="post-meta">
-        <img src="{{ site.author_image }}" alt="{{ site.author }}" class="post-author-image" />
-        <span class="post-author">{{ site.author }}</span>
-        <span class="meta-separator">•</span>
-        <span class="post-date">{{ post.date | date: "%B %d" }}</span>
+    <article class="post-card" data-post onclick="window.location='{{ site.baseurl }}{{ post.url }}'">
+      <div class="post-card-header">
+        {% if post.categories %}
+          <span class="post-category">{{ post.categories | first }}</span>
+        {% endif %}
+        {% include reading-time.html content=post.content %}
       </div>
 
-      <p class="post-excerpt">{{ post.excerpt | strip_html | truncatewords: 25 }}</p>
+      <h2 class="post-card-title">
+        <a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a>
+      </h2>
 
-      <a href="{{ site.baseurl }}{{ post.url }}" class="read-more" onclick="event.stopPropagation();">Read More</a>
+      <p class="post-card-excerpt">{{ post.excerpt | strip_html | truncatewords: 20 }}</p>
+
+      <div class="post-card-footer">
+        <div class="post-author-info">
+          <img src="{{ site.author_image }}" alt="{{ site.author }}" class="post-author-avatar" />
+          <div class="post-author-details">
+            <span class="post-author-name">{{ site.author }}</span>
+            <span class="post-date">{{ post.date | date: "%b %d, %Y" }}</span>
+          </div>
+        </div>
+        <a href="{{ site.baseurl }}{{ post.url }}" class="post-card-link" onclick="event.stopPropagation();" aria-label="Read {{ post.title }}">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </a>
+      </div>
     </article>
   {% endfor %}
 </div>
