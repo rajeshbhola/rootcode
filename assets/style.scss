@@ -520,6 +520,12 @@ nav.main-nav {
       background: rgba(255, 255, 255, 0.1);
     }
 
+    &.active {
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.18);
+      box-shadow: inset 0 -2px 0 #ffffff;
+    }
+
     @include mobile {
       margin: 0 0 20px 0;
       padding: 14px 16px;
@@ -544,6 +550,16 @@ nav.main-nav {
         svg {
           transform: scale(1.1);
         }
+      }
+
+      &.active {
+        color: #667eea;
+        background: rgba(102, 126, 234, 0.08);
+        border-bottom-color: #667eea;
+        border-left: 3px solid #667eea;
+        padding-left: 13px;
+        font-weight: 600;
+        box-shadow: none;
       }
     }
   }
