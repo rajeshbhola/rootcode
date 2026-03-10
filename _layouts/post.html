@@ -5,31 +5,35 @@ layout: default
 <div class="reading-progress-bar"></div>
 
 <article class="post detailed">
-  <h1>{{ page.title }}</h1>
+  <div class="post-hero">
+    <div class="post-hero-content">
+      <h1>{{ page.title }}</h1>
 
-  {% if page.categories.size > 0 or page.tags.size > 0 %}
-  <div class="post-meta-tags">
-    {% if page.categories.size > 0 %}
-      {% for category in page.categories %}
-      <a href="{{ site.baseurl }}/categories#{{ category | slugify }}" class="category-badge">{{ category }}</a>
-      {% endfor %}
-    {% endif %}
+      {% if page.categories.size > 0 or page.tags.size > 0 %}
+      <div class="post-meta-tags">
+        {% if page.categories.size > 0 %}
+          {% for category in page.categories %}
+          <a href="{{ site.baseurl }}/categories#{{ category | slugify }}" class="category-badge">{{ category }}</a>
+          {% endfor %}
+        {% endif %}
 
-    {% if page.tags.size > 0 %}
-      {% for tag in page.tags %}
-      <a href="{{ site.baseurl }}/tags#{{ tag | slugify }}" class="tag-badge">{{ tag }}</a>
-      {% endfor %}
-    {% endif %}
-  </div>
-  {% endif %}
-
-  <div class="author-meta">
-    <img src="{{ site.author_image }}" alt="{{ site.author }}" class="author-image" />
-    <div class="author-info">
-      <p class="author_title">{{site.author}}  ·  {{ page.date | date: "%B %e, %Y" }}  ·  {% include reading-time.html content=page.content %}</p>
-      {% if page.last_modified_at %}
-      <p class="author_title">Updated:  {{ page.last_modified_at | date: "%B %e, %Y" }}</p>
+        {% if page.tags.size > 0 %}
+          {% for tag in page.tags %}
+          <a href="{{ site.baseurl }}/tags#{{ tag | slugify }}" class="tag-badge">{{ tag }}</a>
+          {% endfor %}
+        {% endif %}
+      </div>
       {% endif %}
+
+      <div class="author-meta">
+        <img src="{{ site.author_image }}" alt="{{ site.author }}" class="author-image" />
+        <div class="author-info">
+          <p class="author_title">{{site.author}}  ·  {{ page.date | date: "%B %e, %Y" }}  ·  {% include reading-time.html content=page.content %}</p>
+          {% if page.last_modified_at %}
+          <p class="author_title">Updated:  {{ page.last_modified_at | date: "%B %e, %Y" }}</p>
+          {% endif %}
+        </div>
+      </div>
     </div>
   </div>
 
