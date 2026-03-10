@@ -92,7 +92,7 @@ permalink: /posts/
     // Show posts for current page
     const start = (page - 1) * postsPerPage;
     const end = start + postsPerPage;
-    allPosts.slice(start, end).forEach(post => post.style.display = 'flex');
+    allPosts.slice(start, end).forEach(post => post.style.display = '');
 
     // Update pagination controls
     updatePaginationControls();

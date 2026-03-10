@@ -1373,6 +1373,9 @@ nav.main-nav {
   }
 
   @include mobile {
+    margin: 40px 0.6em 20px;
+    gap: 8px;
+
     .pagination-numbers {
       .pagination-number {
         width: 44px;
@@ -3119,6 +3122,8 @@ footer {
 
 // Modern Post Card
 .post-card {
+  display: flex;
+  flex-direction: column;
   background: var(--card-bg);
   border: 1px solid var(--border-color);
   border-radius: 16px;
@@ -3211,6 +3216,7 @@ footer {
     line-height: 1.6;
     margin: 0 0 24px;
     font-size: 16px;
+    flex: 1;
   }
 
   .post-card-footer {
