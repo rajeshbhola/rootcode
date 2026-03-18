@@ -6,7 +6,7 @@
 name: "@rajeshbhola"
 
 # Short bio or description (displayed in the header)
-description: Thoughts & ideas
+description: thoughts & ideas
 
 # URL of your avatar or profile pic (you can use your GitHub profile pic)
 avatar: /rootcode/images/logo.svg
@@ -91,7 +91,7 @@ plugins:
 
 include: ['_pages']
 
-paginate: 10
+paginate: 9
 paginate_path: /posts/page:num/
 
 # Exclude these files from your production _site

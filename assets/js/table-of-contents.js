@@ -153,10 +153,27 @@
     const toggleButton = tocContainer.querySelector('.toc-toggle');
     const tocIcon = toggleButton.querySelector('.toc-icon');
 
+    // Auto-collapse on mobile
+    var isMobile = window.matchMedia('(max-width: 640px)').matches;
+    if (isMobile) {
+      tocContainer.classList.add('collapsed');
+      toggleButton.setAttribute('aria-expanded', 'false');
+      tocIcon.textContent = '+';
+    }
+
     toggleButton.addEventListener('click', function() {
-      const isExpanded = tocContainer.classList.toggle('collapsed');
-      toggleButton.setAttribute('aria-expanded', !isExpanded);
-      tocIcon.textContent = isExpanded ? '+' : '−';
+      var isCollapsed = tocContainer.classList.toggle('collapsed');
+      toggleButton.setAttribute('aria-expanded', !isCollapsed);
+      tocIcon.textContent = isCollapsed ? '+' : '−';
+    });
+
+    // Also allow tapping the header to toggle on mobile
+    var tocHeader = tocContainer.querySelector('.toc-header');
+    tocHeader.addEventListener('click', function(e) {
+      if (e.target === toggleButton || toggleButton.contains(e.target)) return;
+      var isCollapsed = tocContainer.classList.toggle('collapsed');
+      toggleButton.setAttribute('aria-expanded', !isCollapsed);
+      tocIcon.textContent = isCollapsed ? '+' : '−';
     });
 
     // Highlight active section on scroll using IntersectionObserver
