@@ -1,3 +1,11 @@
+---
+layout: post
+title: Java Identifiers
+categories: [Backend, Java]
+tags: [core java, identifiers, naming convention, clean code]
+excerpt: Learn about java identifiers and its rules.
+---
+
 ## Java Identifiers
 
 Any name used in a Java program is called an **identifier** — whether it's a class name, method name, variable name, or label name.
